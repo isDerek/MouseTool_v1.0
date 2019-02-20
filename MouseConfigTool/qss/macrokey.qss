@@ -1,0 +1,57 @@
+QLabel#setMacroKey01Btn{
+    border: 1px solid black;
+}
+
+QLabel#setMacroKey01Btn:hover{
+    border: 1px solid orange;
+    color: orange;
+}
+
+QLabel#setMacroKey02Btn{
+    border: 1px solid black;
+}
+
+QLabel#setMacroKey02Btn:hover{
+    border: 1px solid orange;
+    color: orange;
+}
+
+QLabel#setMacroKey11Btn{
+    border: 1px solid black;
+}
+
+QLabel#setMacroKey11Btn:hover{
+    border: 1px solid orange;
+    color: orange;
+}
+
+QLabel#setMacroKey12Btn{
+    border: 1px solid black;
+}
+
+QLabel#setMacroKey12Btn:hover{
+    border: 1px solid orange;
+    color: orange;
+}
+
+QLabel#okLabel{
+    border: 1px solid black;
+    background-color: white;
+}
+
+QLabel#okLabel:hover{
+    border: 1px solid orange;
+    background-color: white;
+    color: orange;
+}
+
+QLabel#cancelLabel{
+    border: 1px solid black;
+    background-color: white;
+}
+
+QLabel#cancelLabel:hover{
+    border: 1px solid orange;
+    background-color: white;
+    color: orange;
+}

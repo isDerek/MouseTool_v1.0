@@ -10,7 +10,9 @@
 #include <QTimer>
 #include <QFile>
 #include <QTime>
+#include <QPainter>
 class QFile; // 前置声明 QFile
+
 namespace Ui {
 class MouseConfigTool;
 }
@@ -35,7 +37,10 @@ public:
     void hexSizeToLHStr(int ndata, QByteArrayList &aldata); // hex 文件大小转换为高地位字符串
     void bufferCountsToLHStr(int ndata, QByteArrayList &aldata); // 包数量转换为高地位字符串
     MacroKey *macroKey = new MacroKey; // 实例化 MacroKey 类
-
+    void paintEvent(QPaintEvent *even);
+    void mousePressEvent(QMouseEvent *event); // 窗体拖动
+    void mouseMoveEvent(QMouseEvent *event); // 窗体拖动
+    void mouseReleaseEvent(QMouseEvent *event); // 窗体拖动
 private:
     Ui::MouseConfigTool *ui;
     QStringList HIDDeviceList; // HID 设备显示
@@ -63,8 +68,11 @@ private:
     QByteArray proData; // 数据包
     int checkSum; // 检验位
     QFile *mainQssFile; // 主界面样式文件
+    QFile *macroKeyQssFile; // 主界面样式文件
     void mainGuiInit(); // 主界面样式初始化
     void hiddenMainGui(); // 主界面部分样式隐藏
+    bool m_pressed; // 窗体拖动是否按下
+    QPoint m_movePos;// 窗体拖动位置
 private slots:
     void slot_rfStatusTmr(); // 刷新 HID 设备定时器
     void slot_getHIDDeviceIsOpen(bool); // 获取 HID 线程返回是否开启了设备槽函数
@@ -89,6 +97,7 @@ private slots:
     void on_getMultiKeyBtn_clicked();// 设备获取当前侧键配置
     void on_selectHexFileBtn_clicked();// 选择升级文件
     void on_updateButton_clicked();// 点击升级
+    void on_closeBtn_clicked(); // 关闭窗口按钮
 };
 
 #endif // MOUSECONFIGTOOL_H

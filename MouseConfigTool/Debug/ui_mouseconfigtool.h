@@ -19,8 +19,6 @@
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QStatusBar>
-#include <QtWidgets/QToolBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -83,15 +81,17 @@ public:
     QPushButton *RGBMode3Btn;
     QPushButton *RGBMode2Btn;
     QPushButton *RGBMode1Btn;
+    QLabel *wpiLogo;
+    QPushButton *closeBtn;
     QMenuBar *menuBar;
-    QToolBar *mainToolBar;
-    QStatusBar *statusBar;
 
     void setupUi(QMainWindow *MouseConfigTool)
     {
         if (MouseConfigTool->objectName().isEmpty())
             MouseConfigTool->setObjectName(QString::fromUtf8("MouseConfigTool"));
-        MouseConfigTool->resize(1013, 753);
+        MouseConfigTool->resize(1000, 750);
+        MouseConfigTool->setAnimated(true);
+        MouseConfigTool->setTabShape(QTabWidget::Rounded);
         centralWidget = new QWidget(MouseConfigTool);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         getCurrentPowerGroup = new QGroupBox(centralWidget);
@@ -107,7 +107,7 @@ public:
         currentPowerText->setGeometry(QRect(30, 70, 111, 16));
         usbConfigGroup = new QGroupBox(centralWidget);
         usbConfigGroup->setObjectName(QString::fromUtf8("usbConfigGroup"));
-        usbConfigGroup->setGeometry(QRect(20, 140, 350, 200));
+        usbConfigGroup->setGeometry(QRect(20, 160, 350, 200));
         usbConfigGroup->setMinimumSize(QSize(350, 200));
         usbConfigGroup->setMaximumSize(QSize(350, 200));
         label = new QLabel(usbConfigGroup);
@@ -133,7 +133,7 @@ public:
         PIDLineEdit->setGeometry(QRect(100, 90, 113, 21));
         usbUpdateGroup = new QGroupBox(centralWidget);
         usbUpdateGroup->setObjectName(QString::fromUtf8("usbUpdateGroup"));
-        usbUpdateGroup->setGeometry(QRect(570, 140, 420, 102));
+        usbUpdateGroup->setGeometry(QRect(570, 160, 420, 102));
         usbUpdateGroup->setMinimumSize(QSize(420, 0));
         usbUpdateGroup->setMaximumSize(QSize(420, 16777215));
         usbUpdateGroup->setFlat(false);
@@ -244,7 +244,7 @@ public:
 
         marcroKeyGroup = new QGroupBox(centralWidget);
         marcroKeyGroup->setObjectName(QString::fromUtf8("marcroKeyGroup"));
-        marcroKeyGroup->setGeometry(QRect(790, 570, 200, 100));
+        marcroKeyGroup->setGeometry(QRect(790, 600, 200, 100));
         marcroKeyGroup->setMinimumSize(QSize(200, 100));
         marcroKeyGroup->setMaximumSize(QSize(200, 100));
         verticalLayout_5 = new QVBoxLayout(marcroKeyGroup);
@@ -277,7 +277,7 @@ public:
 
         currentDPIGroup = new QGroupBox(centralWidget);
         currentDPIGroup->setObjectName(QString::fromUtf8("currentDPIGroup"));
-        currentDPIGroup->setGeometry(QRect(660, 260, 150, 300));
+        currentDPIGroup->setGeometry(QRect(660, 280, 150, 300));
         currentDPIGroup->setMinimumSize(QSize(150, 300));
         currentDPIGroup->setMaximumSize(QSize(150, 300));
         verticalLayout_2 = new QVBoxLayout(currentDPIGroup);
@@ -306,7 +306,7 @@ public:
 
         currentLEDGroup = new QGroupBox(centralWidget);
         currentLEDGroup->setObjectName(QString::fromUtf8("currentLEDGroup"));
-        currentLEDGroup->setGeometry(QRect(840, 260, 150, 300));
+        currentLEDGroup->setGeometry(QRect(840, 280, 150, 300));
         currentLEDGroup->setMinimumSize(QSize(150, 300));
         currentLEDGroup->setMaximumSize(QSize(150, 300));
         verticalLayout = new QVBoxLayout(currentLEDGroup);
@@ -333,17 +333,18 @@ public:
 
         verticalLayout->addWidget(RGBMode1Btn);
 
+        wpiLogo = new QLabel(centralWidget);
+        wpiLogo->setObjectName(QString::fromUtf8("wpiLogo"));
+        wpiLogo->setGeometry(QRect(50, 10, 161, 121));
+        wpiLogo->setStyleSheet(QString::fromUtf8(""));
+        closeBtn = new QPushButton(centralWidget);
+        closeBtn->setObjectName(QString::fromUtf8("closeBtn"));
+        closeBtn->setGeometry(QRect(970, 10, 20, 20));
         MouseConfigTool->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MouseConfigTool);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1013, 26));
+        menuBar->setGeometry(QRect(0, 0, 1000, 26));
         MouseConfigTool->setMenuBar(menuBar);
-        mainToolBar = new QToolBar(MouseConfigTool);
-        mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
-        MouseConfigTool->addToolBar(Qt::TopToolBarArea, mainToolBar);
-        statusBar = new QStatusBar(MouseConfigTool);
-        statusBar->setObjectName(QString::fromUtf8("statusBar"));
-        MouseConfigTool->setStatusBar(statusBar);
 
         retranslateUi(MouseConfigTool);
 
@@ -393,6 +394,8 @@ public:
         RGBMode3Btn->setText(QApplication::translate("MouseConfigTool", "\345\221\274\345\220\270\347\201\257", nullptr));
         RGBMode2Btn->setText(QApplication::translate("MouseConfigTool", "\345\276\252\347\216\257\347\201\257", nullptr));
         RGBMode1Btn->setText(QApplication::translate("MouseConfigTool", "\346\227\240\347\201\257\346\225\210", nullptr));
+        wpiLogo->setText(QString());
+        closeBtn->setText(QString());
     } // retranslateUi
 
 };

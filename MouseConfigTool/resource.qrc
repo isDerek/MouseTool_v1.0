@@ -5,8 +5,10 @@
     </qresource>
     <qresource prefix="/hidmouse">
         <file>images/mainWindows.jpg</file>
-        <file>images/mouse.png</file>
         <file>images/wpi_logo.png</file>
         <file>images/wpi_logo_hover.png</file>
+        <file>images/mouse.jpg</file>
+        <file>images/close.png</file>
+        <file>images/close_hover.png</file>
     </qresource>
 </RCC>

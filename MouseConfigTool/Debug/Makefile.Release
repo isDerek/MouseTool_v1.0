@@ -119,9 +119,11 @@ release/qrc_resource.cpp: ../resource.qrc \
 		../qss/mainWindows.qss \
 		../qss/macrokey.qss \
 		../images/wpi_logo.png \
+		../images/close.png \
+		../images/mouse.jpg \
+		../images/close_hover.png \
 		../images/mainWindows.jpg \
-		../images/wpi_logo_hover.png \
-		../images/mouse.png
+		../images/wpi_logo_hover.png
 	E:\QT5\5.12.0\mingw73_64\bin\rcc.exe -name resource ..\resource.qrc -o release\qrc_resource.cpp
 
 compiler_moc_predefs_make_all: release/moc_predefs.h
@@ -254,6 +256,10 @@ release/moc_mouseconfigtool.cpp: E:/QT5/5.12.0/mingw73_64/include/QtWidgets/QMai
 		E:/QT5/5.12.0/mingw73_64/include/QtCore/QFile \
 		E:/QT5/5.12.0/mingw73_64/include/QtCore/QTime \
 		E:/QT5/5.12.0/mingw73_64/include/QtCore/qdatetime.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtGui/QPainter \
+		E:/QT5/5.12.0/mingw73_64/include/QtGui/qpainter.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtGui/qtextoption.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtGui/qpen.h \
 		../mouseconfigtool.h \
 		release/moc_predefs.h \
 		E:/QT5/5.12.0/mingw73_64/bin/moc.exe
@@ -574,6 +580,10 @@ release/main.o: ../main.cpp ../mouseconfigtool.h \
 		E:/QT5/5.12.0/mingw73_64/include/QtCore/QFile \
 		E:/QT5/5.12.0/mingw73_64/include/QtCore/QTime \
 		E:/QT5/5.12.0/mingw73_64/include/QtCore/qdatetime.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtGui/QPainter \
+		E:/QT5/5.12.0/mingw73_64/include/QtGui/qpainter.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtGui/qtextoption.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtGui/qpen.h \
 		E:/QT5/5.12.0/mingw73_64/include/QtWidgets/QApplication \
 		E:/QT5/5.12.0/mingw73_64/include/QtWidgets/qapplication.h \
 		E:/QT5/5.12.0/mingw73_64/include/QtCore/qcoreapplication.h \
@@ -705,13 +715,65 @@ release/mouseconfigtool.o: ../mouseconfigtool.cpp ../mouseconfigtool.h \
 		E:/QT5/5.12.0/mingw73_64/include/QtCore/QFile \
 		E:/QT5/5.12.0/mingw73_64/include/QtCore/QTime \
 		E:/QT5/5.12.0/mingw73_64/include/QtCore/qdatetime.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtGui/QPainter \
+		E:/QT5/5.12.0/mingw73_64/include/QtGui/qpainter.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtGui/qtextoption.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtGui/qpen.h \
 		ui_mouseconfigtool.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtCore/QVariant \
+		E:/QT5/5.12.0/mingw73_64/include/QtWidgets/QApplication \
+		E:/QT5/5.12.0/mingw73_64/include/QtWidgets/qapplication.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtCore/qcoreapplication.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtCore/qeventloop.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtWidgets/qdesktopwidget.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtGui/qguiapplication.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtGui/qinputmethod.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtWidgets/QComboBox \
+		E:/QT5/5.12.0/mingw73_64/include/QtWidgets/qcombobox.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtWidgets/qabstractitemdelegate.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtWidgets/qstyleoption.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtWidgets/qabstractspinbox.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtGui/qvalidator.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtCore/qregularexpression.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtWidgets/qslider.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtWidgets/qabstractslider.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtWidgets/qstyle.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtWidgets/qtabbar.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtWidgets/qrubberband.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtWidgets/qframe.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtCore/qabstractitemmodel.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtWidgets/QGridLayout \
+		E:/QT5/5.12.0/mingw73_64/include/QtWidgets/qgridlayout.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtWidgets/qlayout.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtWidgets/qlayoutitem.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtWidgets/qboxlayout.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtWidgets/QGroupBox \
+		E:/QT5/5.12.0/mingw73_64/include/QtWidgets/qgroupbox.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtWidgets/QLabel \
+		E:/QT5/5.12.0/mingw73_64/include/QtWidgets/qlabel.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtWidgets/QLineEdit \
+		E:/QT5/5.12.0/mingw73_64/include/QtWidgets/qlineedit.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtGui/qtextcursor.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtGui/qtextformat.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtWidgets/QMenuBar \
+		E:/QT5/5.12.0/mingw73_64/include/QtWidgets/qmenubar.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtWidgets/qmenu.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtWidgets/qaction.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtWidgets/qactiongroup.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtWidgets/QPushButton \
+		E:/QT5/5.12.0/mingw73_64/include/QtWidgets/qpushbutton.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtWidgets/qabstractbutton.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtWidgets/QStatusBar \
+		E:/QT5/5.12.0/mingw73_64/include/QtWidgets/qstatusbar.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtWidgets/QVBoxLayout \
+		E:/QT5/5.12.0/mingw73_64/include/QtWidgets/QWidget \
 		../hidapi.h \
 		E:/QT5/5.12.0/mingw73_64/include/QtCore/QDebug \
 		E:/QT5/5.12.0/mingw73_64/include/QtWidgets/QFileDialog \
 		E:/QT5/5.12.0/mingw73_64/include/QtWidgets/qfiledialog.h \
 		E:/QT5/5.12.0/mingw73_64/include/QtCore/qdir.h \
-		E:/QT5/5.12.0/mingw73_64/include/QtCore/qfileinfo.h
+		E:/QT5/5.12.0/mingw73_64/include/QtCore/qfileinfo.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtGui/QMouseEvent
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\mouseconfigtool.o ..\mouseconfigtool.cpp
 
 release/usbreadthread.o: ../usbreadthread.cpp ../usbreadthread.h \
@@ -836,6 +898,10 @@ release/usbreadthread.o: ../usbreadthread.cpp ../usbreadthread.h \
 		E:/QT5/5.12.0/mingw73_64/include/QtCore/QFile \
 		E:/QT5/5.12.0/mingw73_64/include/QtCore/QTime \
 		E:/QT5/5.12.0/mingw73_64/include/QtCore/qdatetime.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtGui/QPainter \
+		E:/QT5/5.12.0/mingw73_64/include/QtGui/qpainter.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtGui/qtextoption.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtGui/qpen.h \
 		E:/QT5/5.12.0/mingw73_64/include/QtCore/QDebug \
 		../hidapi.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\usbreadthread.o ..\usbreadthread.cpp
@@ -1018,6 +1084,17 @@ release/macrokey.o: ../macrokey.cpp ../macrokey.h \
 		E:/QT5/5.12.0/mingw73_64/include/QtGui/qtouchdevice.h \
 		E:/QT5/5.12.0/mingw73_64/include/QtCore/QMap \
 		ui_macrokey.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtCore/QVariant \
+		E:/QT5/5.12.0/mingw73_64/include/QtWidgets/QApplication \
+		E:/QT5/5.12.0/mingw73_64/include/QtWidgets/qapplication.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtCore/qcoreapplication.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtCore/qeventloop.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtWidgets/qdesktopwidget.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtGui/qguiapplication.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtGui/qinputmethod.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtWidgets/QLabel \
+		E:/QT5/5.12.0/mingw73_64/include/QtWidgets/qlabel.h \
+		E:/QT5/5.12.0/mingw73_64/include/QtWidgets/qframe.h \
 		../keymap.h \
 		E:/QT5/5.12.0/mingw73_64/include/QtGui/QKeyEvent \
 		E:/QT5/5.12.0/mingw73_64/include/QtCore/QDebug

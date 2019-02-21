@@ -3,14 +3,17 @@
 #include "hidapi.h"
 #include <QDebug>
 #include <QFileDialog>
-
+#include "QMouseEvent"
+#include <QBitmap>
 MouseConfigTool::MouseConfigTool(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MouseConfigTool)
 {
+    this->setWindowFlag(Qt::FramelessWindowHint); // 隐藏标题栏
+    this->setFixedSize(1000,750); // 固定窗口大小
     HIDDeviceIsOpen = false;
     ui->setupUi(this);
-    mainGuiInit();
+    mainGuiInit(); // 窗口 UI 初始化
     hiddenMainGui();
     rfStatusTmr = new QTimer;
     connect(rfStatusTmr, SIGNAL(timeout()), this, SLOT(slot_rfStatusTmr()));
@@ -28,6 +31,7 @@ MouseConfigTool::~MouseConfigTool()
 
 void MouseConfigTool::mainGuiInit()
 {
+    // 主界面 qss 文件载入
     mainQssFile = new QFile(":/qss/qss/mainWindows.qss",this);
     // 只读方式打开该文件
     mainQssFile->open(QFile::ReadOnly);
@@ -36,6 +40,17 @@ void MouseConfigTool::mainGuiInit()
     // 为 QApplication 设置样式表
     qApp->setStyleSheet(styleSheet);
     mainQssFile->close();
+
+    // 按键宏界面 qss 文件载入
+    macroKeyQssFile = new QFile(":/qss/qss/macrokey.qss",this);
+    // 只读方式打开该文件
+    macroKeyQssFile->open(QFile::ReadOnly);
+    // 读取文件全部内容
+    styleSheet = QString(macroKeyQssFile->readAll());
+    // 为 QApplication 设置样式表
+    macroKeyQssFile->close();
+    macroKey->setStyleSheet(styleSheet);
+
 }
 
 void MouseConfigTool::hiddenMainGui()
@@ -47,6 +62,59 @@ void MouseConfigTool::hiddenMainGui()
     ui->getCurrentPowerGroup->hide();
     ui->setDriverModeGroup->hide();
 }
+
+void MouseConfigTool::mouseMoveEvent(QMouseEvent *event)
+{
+    if (m_pressed
+            && (event->buttons() && Qt::LeftButton)
+            && (event->globalPos() - m_movePos).manhattanLength() > QApplication::startDragDistance())
+        {
+            QPoint movePos = event->globalPos() - m_movePos;
+            this->move(movePos);
+            m_movePos = event->globalPos() - pos();
+        }
+
+        return QMainWindow::mouseMoveEvent(event);
+}
+
+void MouseConfigTool::mousePressEvent(QMouseEvent *event)
+{
+    m_pressed = true;
+
+    m_movePos = event->globalPos() - pos();
+
+    return QMainWindow::mousePressEvent(event);
+}
+
+void MouseConfigTool::mouseReleaseEvent(QMouseEvent *event)
+{
+    m_pressed = false;
+
+    return QMainWindow::mouseReleaseEvent(event);
+}
+
+void MouseConfigTool::paintEvent(QPaintEvent *even)
+{
+    //    // 鼠标图片处理 影响到别的样式，有卡顿现象
+    //    QPixmap mouse(":/hidmouse/images/mouse.jpg");
+    //    QPainter painter(this);
+    //    painter.translate(350,400);
+    //    painter.rotate(90);
+    //    QPixmap mouseHandler = mouse.scaled(QSize(300,300));
+    //    painter.drawPixmap(0,0,mouseHandler);
+
+    // 窗口圆角处理
+    QBitmap bmp(this->size());
+    bmp.fill();
+    QPainter p(&bmp);
+    p.setPen(Qt::NoPen);
+    p.setBrush(Qt::black);
+    p.drawRoundedRect(bmp.rect(),20,20);
+    setMask(bmp);
+
+    ui->closeBtn->setCursor(QCursor(Qt::PointingHandCursor)); // 鼠标移动到窗口关闭按钮样式
+}
+
 void MouseConfigTool::Delay_Msec(int msec)
 {
     QTime _Time = QTime::currentTime().addMSecs(msec);
@@ -131,7 +199,14 @@ void MouseConfigTool::getHIDDevceInfo()
      while (cur_dev) {
  //        qDebug("Device Found\n  type: %04hx %04hx\n  path: %s\n  serial_number: %ls", cur_dev->vendor_id, cur_dev->product_id, cur_dev->path, cur_dev->serial_number);
  //        qDebug("\n");
-
+    // 查找到指定设备打开设备
+    if(cur_dev->vendor_id == 1165 && cur_dev->product_id == 52736)
+    {
+        usbReadThread.getOpenHIDDevice(52736,1165,!HIDDeviceIsOpen);// 调用线程函数去传递数据
+        usbReadThread.start();
+        rfStatusTmr->stop();
+        break;
+    }
     sprintf(HID,"VID:%x PID:%x",cur_dev->vendor_id,cur_dev->product_id);
     sprintf(product,"%ls",cur_dev->product_string);
     sprintf(manufacturer,"%ls",cur_dev->manufacturer_string);
@@ -253,8 +328,6 @@ void MouseConfigTool::bufferCountsToLHStr(int ndata, QByteArrayList &aldata)
     aldata.append(IntSize);
     BinToInt(IntSize,alBinSize[1]);
     aldata.append(IntSize);
-//    qDebug()<<"data 1:"<<aldata[1];
-//    qDebug()<<"data 0:"<<aldata[0];
 }
 
 void MouseConfigTool::hexSizeToLHStr(int ndata, QByteArrayList &aldata)
@@ -633,4 +706,9 @@ void MouseConfigTool::on_updateButton_clicked()
         alBufferLine.clear(); // 清空之前的 Buffer
         SendData.clear(); // 清空数据
     }
+}
+
+void MouseConfigTool::on_closeBtn_clicked()
+{
+    close();
 }

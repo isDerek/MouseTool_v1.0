@@ -220,6 +220,7 @@ Makefile: ../MouseConfigTool.pro E:/QT5/5.12.0/mingw73_64/mkspecs/win32-g++/qmak
 		E:/QT5/5.12.0/mingw73_64/mkspecs/features/qt_config.prf \
 		E:/QT5/5.12.0/mingw73_64/mkspecs/win32-g++/qmake.conf \
 		E:/QT5/5.12.0/mingw73_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		E:/QT5/5.12.0/mingw73_64/mkspecs/features/exclusive_builds.prf \
 		E:/QT5/5.12.0/mingw73_64/mkspecs/features/toolchain.prf \
 		E:/QT5/5.12.0/mingw73_64/mkspecs/features/default_pre.prf \
@@ -407,6 +408,7 @@ E:/QT5/5.12.0/mingw73_64/mkspecs/features/qt_functions.prf:
 E:/QT5/5.12.0/mingw73_64/mkspecs/features/qt_config.prf:
 E:/QT5/5.12.0/mingw73_64/mkspecs/win32-g++/qmake.conf:
 E:/QT5/5.12.0/mingw73_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 E:/QT5/5.12.0/mingw73_64/mkspecs/features/exclusive_builds.prf:
 E:/QT5/5.12.0/mingw73_64/mkspecs/features/toolchain.prf:
 E:/QT5/5.12.0/mingw73_64/mkspecs/features/default_pre.prf:

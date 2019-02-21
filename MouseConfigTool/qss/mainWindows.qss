@@ -1,17 +1,30 @@
 QMainWindow#MouseConfigTool{
-border-image: url(:/hidmouse/images/mainWindows.jpg);
+    border-image: url(:/hidmouse/images/mainWindows.jpg);
 }
 QLabel#wpiLogo{
-border-image: url(:/hidmouse/images/wpi_logo.png);
+    border-image: url(:/hidmouse/images/wpi_logo.png);
 }
-QLabel#mouseImg{
-background-image: url(:/hidmouse/images/mouse.png);
+
+QLabel#wpiLogo::hover{
+    border-image: url(:/hidmouse/images/wpi_logo_hover.png);
 }
 
 QLabel#filePathText{
     font-size:15px;
     color:white;
     font-weight:bold;
+}
+
+QPushButton#closeBtn{
+    border-image: url(:/hidmouse/images/close.png);
+    background-color:none;
+    border:none;
+}
+
+QPushButton#closeBtn::hover{
+    border-image: url(:/hidmouse/images/close_hover.png);
+    background-color:none;
+    border:none;
 }
 
 QLineEdit#updateHexName{
@@ -29,3 +42,9 @@ QPushButton{
     background-color:#666;
     color:white;
 }
+
+QPushButton::hover{
+    background-color:#888;
+    color:white;
+}
+

@@ -27,14 +27,6 @@ MacroKey::~MacroKey()
 
 void MacroKey::macroKeyGuiInit()
 {
-    qssFile = new QFile(":/qss/qss/macrokey.qss",this);
-    // 只读方式打开该文件
-    qssFile->open(QFile::ReadOnly);
-    // 读取文件全部内容
-    QString styleSheet = QString(qssFile->readAll());
-    // 为 QApplication 设置样式表
-    qApp->setStyleSheet(styleSheet);
-    qssFile->close();
     ui->setMacroKey01Btn->setCursor(QCursor(Qt::PointingHandCursor)); // 设置光标移动到侧键 1 第一顺位鼠标样式
     ui->setMacroKey02Btn->setCursor(QCursor(Qt::PointingHandCursor)); // 设置光标移动到侧键 1 第二顺位鼠标样式
     ui->setMacroKey11Btn->setCursor(QCursor(Qt::PointingHandCursor)); // 设置光标移动到侧键 2 第一顺位鼠标样式

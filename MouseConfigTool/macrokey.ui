@@ -122,7 +122,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>组合键 2 第二顺位</string>
+    <string>组合键 2 第一顺位</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>

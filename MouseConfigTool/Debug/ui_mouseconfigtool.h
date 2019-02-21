@@ -83,6 +83,7 @@ public:
     QPushButton *RGBMode1Btn;
     QLabel *wpiLogo;
     QPushButton *closeBtn;
+    QPushButton *mouseBtn;
     QMenuBar *menuBar;
 
     void setupUi(QMainWindow *MouseConfigTool)
@@ -96,7 +97,7 @@ public:
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         getCurrentPowerGroup = new QGroupBox(centralWidget);
         getCurrentPowerGroup->setObjectName(QString::fromUtf8("getCurrentPowerGroup"));
-        getCurrentPowerGroup->setGeometry(QRect(410, 520, 150, 111));
+        getCurrentPowerGroup->setGeometry(QRect(610, 590, 150, 111));
         getCurrentPowerGroup->setMinimumSize(QSize(150, 0));
         getCurrentPowerGroup->setMaximumSize(QSize(150, 16777215));
         getCurrentPowerBtn = new QPushButton(getCurrentPowerGroup);
@@ -163,7 +164,7 @@ public:
 
         getCurrentDPIGroup = new QGroupBox(centralWidget);
         getCurrentDPIGroup->setObjectName(QString::fromUtf8("getCurrentDPIGroup"));
-        getCurrentDPIGroup->setGeometry(QRect(340, 380, 150, 121));
+        getCurrentDPIGroup->setGeometry(QRect(500, 320, 150, 121));
         getCurrentDPIGroup->setMinimumSize(QSize(150, 0));
         getCurrentDPIGroup->setMaximumSize(QSize(150, 16777215));
         verticalLayout_3 = new QVBoxLayout(getCurrentDPIGroup);
@@ -182,7 +183,7 @@ public:
 
         getCurrentLEDGroup = new QGroupBox(centralWidget);
         getCurrentLEDGroup->setObjectName(QString::fromUtf8("getCurrentLEDGroup"));
-        getCurrentLEDGroup->setGeometry(QRect(230, 510, 150, 121));
+        getCurrentLEDGroup->setGeometry(QRect(490, 450, 150, 121));
         getCurrentLEDGroup->setMinimumSize(QSize(150, 0));
         getCurrentLEDGroup->setMaximumSize(QSize(150, 16777215));
         verticalLayout_6 = new QVBoxLayout(getCurrentLEDGroup);
@@ -202,7 +203,7 @@ public:
 
         getDriverModeGroup = new QGroupBox(centralWidget);
         getDriverModeGroup->setObjectName(QString::fromUtf8("getDriverModeGroup"));
-        getDriverModeGroup->setGeometry(QRect(150, 350, 176, 120));
+        getDriverModeGroup->setGeometry(QRect(380, 160, 176, 120));
         getDriverModeGroup->setMaximumSize(QSize(16777215, 120));
         verticalLayout_7 = new QVBoxLayout(getDriverModeGroup);
         verticalLayout_7->setSpacing(6);
@@ -220,7 +221,7 @@ public:
 
         getMacroKeyGroup = new QGroupBox(centralWidget);
         getMacroKeyGroup->setObjectName(QString::fromUtf8("getMacroKeyGroup"));
-        getMacroKeyGroup->setGeometry(QRect(380, 250, 150, 120));
+        getMacroKeyGroup->setGeometry(QRect(510, 10, 150, 120));
         getMacroKeyGroup->setMinimumSize(QSize(150, 0));
         getMacroKeyGroup->setMaximumSize(QSize(150, 120));
         gridLayout_5 = new QGridLayout(getMacroKeyGroup);
@@ -258,7 +259,7 @@ public:
 
         setDriverModeGroup = new QGroupBox(centralWidget);
         setDriverModeGroup->setObjectName(QString::fromUtf8("setDriverModeGroup"));
-        setDriverModeGroup->setGeometry(QRect(380, 140, 150, 100));
+        setDriverModeGroup->setGeometry(QRect(350, 10, 150, 100));
         setDriverModeGroup->setMinimumSize(QSize(150, 100));
         setDriverModeGroup->setMaximumSize(QSize(150, 100));
         verticalLayout_8 = new QVBoxLayout(setDriverModeGroup);
@@ -340,6 +341,9 @@ public:
         closeBtn = new QPushButton(centralWidget);
         closeBtn->setObjectName(QString::fromUtf8("closeBtn"));
         closeBtn->setGeometry(QRect(970, 10, 20, 20));
+        mouseBtn = new QPushButton(centralWidget);
+        mouseBtn->setObjectName(QString::fromUtf8("mouseBtn"));
+        mouseBtn->setGeometry(QRect(90, 370, 241, 331));
         MouseConfigTool->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MouseConfigTool);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
@@ -396,6 +400,7 @@ public:
         RGBMode1Btn->setText(QApplication::translate("MouseConfigTool", "\346\227\240\347\201\257\346\225\210", nullptr));
         wpiLogo->setText(QString());
         closeBtn->setText(QString());
+        mouseBtn->setText(QString());
     } // retranslateUi
 
 };

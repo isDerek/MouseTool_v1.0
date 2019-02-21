@@ -5,6 +5,7 @@
 #include "usbreadthread.h"
 #include "usermodepro.h"
 #include "macrokey.h"
+#include "macros.h"
 #include <QThread>
 #include <QObject>
 #include <QTimer>
@@ -36,8 +37,9 @@ public:
     void hexFileHandler();// hex 文件处理方法
     void hexSizeToLHStr(int ndata, QByteArrayList &aldata); // hex 文件大小转换为高地位字符串
     void bufferCountsToLHStr(int ndata, QByteArrayList &aldata); // 包数量转换为高地位字符串
-    MacroKey *macroKey = new MacroKey; // 实例化 MacroKey 类
-    void paintEvent(QPaintEvent *even);
+//    MacroKey *macroKey = new MacroKey; // 实例化 MacroKey 类
+    Macros *macros = new Macros; // 实例化 Macro 类
+    void paintEvent(QPaintEvent *); // 界面重绘
     void mousePressEvent(QMouseEvent *event); // 窗体拖动
     void mouseMoveEvent(QMouseEvent *event); // 窗体拖动
     void mouseReleaseEvent(QMouseEvent *event); // 窗体拖动

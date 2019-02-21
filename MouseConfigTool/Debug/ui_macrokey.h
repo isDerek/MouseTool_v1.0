@@ -101,7 +101,7 @@ public:
         MacroKey1Text->setText(QApplication::translate("MacroKey", "\344\276\247\351\224\256 2", nullptr));
         setMacroKey01Btn->setText(QApplication::translate("MacroKey", "\347\273\204\345\220\210\351\224\256 1 \347\254\254\344\270\200\351\241\272\344\275\215", nullptr));
         setMacroKey02Btn->setText(QApplication::translate("MacroKey", "\347\273\204\345\220\210\351\224\256 1 \347\254\254\344\272\214\351\241\272\344\275\215", nullptr));
-        setMacroKey11Btn->setText(QApplication::translate("MacroKey", "\347\273\204\345\220\210\351\224\256 2 \347\254\254\344\272\214\351\241\272\344\275\215", nullptr));
+        setMacroKey11Btn->setText(QApplication::translate("MacroKey", "\347\273\204\345\220\210\351\224\256 2 \347\254\254\344\270\200\351\241\272\344\275\215", nullptr));
         setMacroKey12Btn->setText(QApplication::translate("MacroKey", "\347\273\204\345\220\210\351\224\256 2 \347\254\254\344\272\214\351\241\272\344\275\215", nullptr));
         macroKey11Text->setText(QApplication::translate("MacroKey", "\347\273\204\345\220\210\351\224\256 2 \347\254\254\344\270\200\351\241\272\344\275\215", nullptr));
         macroKey12Text->setText(QApplication::translate("MacroKey", "\347\273\204\345\220\210\351\224\256 2 \347\254\254\344\272\214\351\241\272\344\275\215", nullptr));

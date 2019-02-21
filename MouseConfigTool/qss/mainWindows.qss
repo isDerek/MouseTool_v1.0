@@ -5,6 +5,9 @@ QLabel#wpiLogo{
     border-image: url(:/hidmouse/images/wpi_logo.png);
 }
 
+QPushButton#mouseBtn{
+    border-image: url(:/hidmouse/images/mouse.jpg);
+}
 QLabel#wpiLogo::hover{
     border-image: url(:/hidmouse/images/wpi_logo_hover.png);
 }

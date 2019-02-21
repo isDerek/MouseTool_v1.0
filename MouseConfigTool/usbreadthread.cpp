@@ -44,8 +44,8 @@ void USBReadThread::getOpenHIDDevice(unsigned short PID, unsigned short VID, boo
     currentPID = PID;
     currentVID = VID;
     startHIDDeviceFlag = isOpen;
-    qDebug()<<currentPID;
-    qDebug()<<currentVID;
+//    qDebug()<<currentPID;
+//    qDebug()<<currentVID;
     if(isOpen)
     {
         handle = hid_open(currentVID,currentPID,nullptr);

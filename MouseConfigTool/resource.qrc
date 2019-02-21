@@ -7,8 +7,9 @@
         <file>images/mainWindows.jpg</file>
         <file>images/wpi_logo.png</file>
         <file>images/wpi_logo_hover.png</file>
-        <file>images/mouse.jpg</file>
         <file>images/close.png</file>
         <file>images/close_hover.png</file>
+        <file>images/mouse_exe.icon</file>
+        <file>images/mouse.jpg</file>
     </qresource>
 </RCC>

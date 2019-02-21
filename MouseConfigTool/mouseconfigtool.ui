@@ -23,8 +23,8 @@
    <widget class="QGroupBox" name="getCurrentPowerGroup">
     <property name="geometry">
      <rect>
-      <x>410</x>
-      <y>520</y>
+      <x>610</x>
+      <y>590</y>
       <width>150</width>
       <height>111</height>
      </rect>
@@ -235,8 +235,8 @@
    <widget class="QGroupBox" name="getCurrentDPIGroup">
     <property name="geometry">
      <rect>
-      <x>340</x>
-      <y>380</y>
+      <x>500</x>
+      <y>320</y>
       <width>150</width>
       <height>121</height>
      </rect>
@@ -276,8 +276,8 @@
    <widget class="QGroupBox" name="getCurrentLEDGroup">
     <property name="geometry">
      <rect>
-      <x>230</x>
-      <y>510</y>
+      <x>490</x>
+      <y>450</y>
       <width>150</width>
       <height>121</height>
      </rect>
@@ -323,8 +323,8 @@
    <widget class="QGroupBox" name="getDriverModeGroup">
     <property name="geometry">
      <rect>
-      <x>150</x>
-      <y>350</y>
+      <x>380</x>
+      <y>160</y>
       <width>176</width>
       <height>120</height>
      </rect>
@@ -358,8 +358,8 @@
    <widget class="QGroupBox" name="getMacroKeyGroup">
     <property name="geometry">
      <rect>
-      <x>380</x>
-      <y>250</y>
+      <x>510</x>
+      <y>10</y>
       <width>150</width>
       <height>120</height>
      </rect>
@@ -440,8 +440,8 @@
    <widget class="QGroupBox" name="setDriverModeGroup">
     <property name="geometry">
      <rect>
-      <x>380</x>
-      <y>140</y>
+      <x>350</x>
+      <y>10</y>
       <width>150</width>
       <height>100</height>
      </rect>
@@ -611,6 +611,19 @@
       <y>10</y>
       <width>20</width>
       <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="mouseBtn">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>370</y>
+      <width>241</width>
+      <height>331</height>
      </rect>
     </property>
     <property name="text">

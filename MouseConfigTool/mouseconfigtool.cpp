@@ -10,6 +10,7 @@ MouseConfigTool::MouseConfigTool(QWidget *parent) :
     ui(new Ui::MouseConfigTool)
 {
     this->setWindowFlag(Qt::FramelessWindowHint); // 隐藏标题栏
+    this->setWindowIcon(QIcon(":/hidmouse/images/mouse_exe.png"));
     this->setFixedSize(1000,750); // 固定窗口大小
     HIDDeviceIsOpen = false;
     ui->setupUi(this);
@@ -21,7 +22,7 @@ MouseConfigTool::MouseConfigTool(QWidget *parent) :
     ui->updateHexName->setReadOnly(true);
     connect(&usbReadThread, SIGNAL(postHIDDeviceOpen(bool)), this, SLOT(slot_getHIDDeviceIsOpen(bool)));// 接收线程传来设备是否开启的数据
     connect(&usbReadThread,SIGNAL(postRevData(QByteArray)),this,SLOT(slot_getRevData(QByteArray))); // 接收线程传来的数据
-    connect(macroKey,SIGNAL(macroKey_signal(int, int, int, int)),this,SLOT(slot_getMacroKeyConfig(int, int, int, int)));
+//    connect(macroKey,SIGNAL(macroKey_signal(int, int, int, int)),this,SLOT(slot_getMacroKeyConfig(int, int, int, int)));
 }
 
 MouseConfigTool::~MouseConfigTool()
@@ -49,7 +50,7 @@ void MouseConfigTool::mainGuiInit()
     styleSheet = QString(macroKeyQssFile->readAll());
     // 为 QApplication 设置样式表
     macroKeyQssFile->close();
-    macroKey->setStyleSheet(styleSheet);
+//    macroKey->setStyleSheet(styleSheet);
 
 }
 
@@ -93,16 +94,8 @@ void MouseConfigTool::mouseReleaseEvent(QMouseEvent *event)
     return QMainWindow::mouseReleaseEvent(event);
 }
 
-void MouseConfigTool::paintEvent(QPaintEvent *even)
+void MouseConfigTool::paintEvent(QPaintEvent *)
 {
-    //    // 鼠标图片处理 影响到别的样式，有卡顿现象
-    //    QPixmap mouse(":/hidmouse/images/mouse.jpg");
-    //    QPainter painter(this);
-    //    painter.translate(350,400);
-    //    painter.rotate(90);
-    //    QPixmap mouseHandler = mouse.scaled(QSize(300,300));
-    //    painter.drawPixmap(0,0,mouseHandler);
-
     // 窗口圆角处理
     QBitmap bmp(this->size());
     bmp.fill();
@@ -245,13 +238,6 @@ void MouseConfigTool::setComboHIDBox()
 {
     QStringList portItems;
     int portItemsCounts;
-//    // 如果串口正在使用，然后串口定时刷新，当前串口字段依旧保留
-//    if(m_serial->isOpen())
-//    {
-//      QString serialPort = m_serial->portName();
-//      commPortList.insert(0,serialPort);
-//    }
-//    qDebug() << commPortList;
     if(! HIDDeviceList.isEmpty())
     {
         portItemsCounts = ui->comboHIDBox->count();
@@ -384,7 +370,7 @@ void MouseConfigTool::hexSizeToLHStr(int ndata, QByteArrayList &aldata)
 void MouseConfigTool::hexFileHandler()
 {
     QFile file;
-    QString f = QFileDialog::getOpenFileName(this,QString("选择文件"),QString("./"));
+    QString f = QFileDialog::getOpenFileName(this,QString("选择升级文件"),QString("./"));
     file.setFileName(f);
     if(file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
@@ -663,7 +649,8 @@ void MouseConfigTool::on_setMultiKeyBtn_clicked()
 {
     if(HIDDeviceIsOpen)
     {
-        macroKey->show();
+//        macroKey->show();
+        macros->show();
     }
 }
 

@@ -44,7 +44,7 @@ QByteArray UserModePro::setReportDataStr(char ReportID, char CMDStatus, char CMD
     {
         dataSum = dataSum + protocolData[h];
     }
-    protocolData[64] = 0x55-(dataSum)&0xff;
+    protocolData[64] = char(0x55-(dataSum)&0xff);
     return protocolData;
 }
 
@@ -73,7 +73,7 @@ void UserModePro::postDPIMode2Notify()
     CMDID = 0x05;
     DataLSB = 0x00;
     DataMSB = 0x00;
-    DataLength = strlen(sendData);
+    DataLength = char(strlen(sendData));
     protocolData = setReportDataStr(ReportID,CMDStatus,CMDID,DataLSB,DataMSB,DataLength,sendData);
     usbReadThread.getProtocolData(protocolData);
 }
@@ -88,7 +88,7 @@ void UserModePro::postDPIMode3Notify()
     CMDID = 0x05;
     DataLSB = 0x00;
     DataMSB = 0x00;
-    DataLength = strlen(sendData);
+    DataLength = char(strlen(sendData));
     protocolData = setReportDataStr(ReportID,CMDStatus,CMDID,DataLSB,DataMSB,DataLength,sendData);
     usbReadThread.getProtocolData(protocolData);
 }
@@ -103,7 +103,7 @@ void UserModePro::postDPIMode4Notify()
     CMDID = 0x05;
     DataLSB = 0x00;
     DataMSB = 0x00;
-    DataLength = strlen(sendData);
+    DataLength = char(strlen(sendData));
     protocolData = setReportDataStr(ReportID,CMDStatus,CMDID,DataLSB,DataMSB,DataLength,sendData);
     usbReadThread.getProtocolData(protocolData);
 }
@@ -131,7 +131,7 @@ void UserModePro::postRGBMode2Notify()
     CMDID = 0x0B;
     DataLSB = 0x00;
     DataMSB = 0x00;
-    DataLength = strlen(sendData);
+    DataLength = char(strlen(sendData));
     protocolData = setReportDataStr(ReportID,CMDStatus,CMDID,DataLSB,DataMSB,DataLength,sendData);
     usbReadThread.getProtocolData(protocolData);
 }
@@ -145,7 +145,7 @@ void UserModePro::postRGBMode3Notify()
     CMDID = 0x0B;
     DataLSB = 0x00;
     DataMSB = 0x00;
-    DataLength = strlen(sendData);
+    DataLength = char(strlen(sendData));
     protocolData = setReportDataStr(ReportID,CMDStatus,CMDID,DataLSB,DataMSB,DataLength,sendData);
     usbReadThread.getProtocolData(protocolData);
 }
@@ -159,7 +159,7 @@ void UserModePro::postRGBMode4Notify()
     CMDID = 0x0B;
     DataLSB = 0x00;
     DataMSB = 0x00;
-    DataLength = strlen(sendData);
+    DataLength = char(strlen(sendData));
     protocolData = setReportDataStr(ReportID,CMDStatus,CMDID,DataLSB,DataMSB,DataLength,sendData);
     usbReadThread.getProtocolData(protocolData);
 }
@@ -180,6 +180,26 @@ void UserModePro::postMacroKeyNotify(int macroKey01, int macroKey02, int macroKe
     protocolData = setReportDataStr(ReportID,CMDStatus,CMDID,DataLSB,DataMSB,DataLength,sendData);
     usbReadThread.getProtocolData(protocolData);
 }
+
+// 按键宏模式
+void UserModePro::postMacrosNotify(QByteArray data, int macrokey)
+{
+    QByteArray sendData,protocolData;
+    sendData[0] = char(macrokey);
+    for (int i = 0; i < data.length(); i++) {
+        sendData[i+1] = data[i];
+    }
+    ReportID = 0x00;
+    CMDStatus = 0x00;
+    CMDID = 0x09;
+    DataLSB = 0x00;
+    DataMSB = 0x00;
+    DataLength = char(strlen(sendData));
+    protocolData = setReportDataStr(ReportID,CMDStatus,CMDID,DataLSB,DataMSB,DataLength,sendData);
+    usbReadThread.getProtocolData(protocolData);
+}
+
+
 // 设备进入配置模式
 void UserModePro::postConfigModeNotify()
 {
@@ -190,7 +210,7 @@ void UserModePro::postConfigModeNotify()
     CMDID = 0x03;
     DataLSB = 0x00;
     DataMSB = 0x00;
-    DataLength = strlen(sendData);
+    DataLength = char(strlen(sendData));
     protocolData = setReportDataStr(ReportID,CMDStatus,CMDID,DataLSB,DataMSB,DataLength,sendData);
     usbReadThread.getProtocolData(protocolData);
 }
@@ -265,18 +285,41 @@ void UserModePro::getCurrentPower()
     usbReadThread.getProtocolData(protocolData);
 }
 
-void UserModePro::getCurrentMacroKeyConfig()
+void UserModePro::getCurrentMacroKey1Config()
 {
     QByteArray sendData,protocolData;
-    sendData[0] = 0x00;
+    sendData[0] = 0x01;
     ReportID = 0x00;
     CMDStatus = 0x00;
     CMDID = 0x0A;
     DataLSB = 0x00;
     DataMSB = 0x00;
-    DataLength = 0;
+    DataLength = 1;
     protocolData = setReportDataStr(ReportID,CMDStatus,CMDID,DataLSB,DataMSB,DataLength,sendData);
     usbReadThread.getProtocolData(protocolData);
+}
+
+void UserModePro::getCurrentMacroKey2Config()
+{
+    QByteArray sendData,protocolData;
+    sendData[0] = 0x02;
+    ReportID = 0x00;
+    CMDStatus = 0x00;
+    CMDID = 0x0A;
+    DataLSB = 0x00;
+    DataMSB = 0x00;
+    DataLength = 1;
+    protocolData = setReportDataStr(ReportID,CMDStatus,CMDID,DataLSB,DataMSB,DataLength,sendData);
+    usbReadThread.getProtocolData(protocolData);
+}
+
+void UserModePro::getMouseCurrentStatus()
+{
+    getCurrentMacroKey1Config();
+    getCurrentMacroKey2Config();
+    getCurrentPower();
+    getCurrentDPIMode();
+    getCurrentRGBMode();
 }
 
 void UserModePro::postEnterBootLoaderMode()

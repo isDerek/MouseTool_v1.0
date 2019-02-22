@@ -29,15 +29,12 @@ SOURCES += \
         mouseconfigtool.cpp \
     usbreadthread.cpp \
     usermodepro.cpp \
-    macrokey.cpp \
     macros.cpp
 
 HEADERS += \
         mouseconfigtool.h \
     usbreadthread.h \
     usermodepro.h \
-    macrokey.h \
-    keymap.h \
     macros.h \
     key_map.h
 
@@ -58,3 +55,4 @@ RESOURCES += \
 
 DISTFILES +=
 
+RC_FILE += icon.rc

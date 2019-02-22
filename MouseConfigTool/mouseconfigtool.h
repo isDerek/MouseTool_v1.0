@@ -4,7 +4,6 @@
 #include <QMainWindow>
 #include "usbreadthread.h"
 #include "usermodepro.h"
-#include "macrokey.h"
 #include "macros.h"
 #include <QThread>
 #include <QObject>
@@ -27,7 +26,6 @@ public:
     ~MouseConfigTool();
     void Delay_Msec(int msec);
     void getHIDDevceInfo(); // 将 HID 设备信息添加进 List
-    void setComboHIDBox(); // 将 HID 信息写入设备下拉框
     void clearHIDDeviceInfoList(); // 清空 HID 设备信息 List
     unsigned short HexStrToUShort(QString str, int length); // 16进制字符串转 Ushort
     char ConvertHexChar(char ch); // 字符转 16 进制
@@ -37,7 +35,6 @@ public:
     void hexFileHandler();// hex 文件处理方法
     void hexSizeToLHStr(int ndata, QByteArrayList &aldata); // hex 文件大小转换为高地位字符串
     void bufferCountsToLHStr(int ndata, QByteArrayList &aldata); // 包数量转换为高地位字符串
-//    MacroKey *macroKey = new MacroKey; // 实例化 MacroKey 类
     Macros *macros = new Macros; // 实例化 Macro 类
     void paintEvent(QPaintEvent *); // 界面重绘
     void mousePressEvent(QMouseEvent *event); // 窗体拖动
@@ -75,12 +72,13 @@ private:
     void hiddenMainGui(); // 主界面部分样式隐藏
     bool m_pressed; // 窗体拖动是否按下
     QPoint m_movePos;// 窗体拖动位置
+    int macroKey = 0; // 初始化按键宏空闲状态， 1 代表设置侧键 1， 2 代表设置侧键 2
+    bool getCurrentMouseStatusFlag = true; // 获取鼠标当前状态（界面初始化只执行一次）
 private slots:
     void slot_rfStatusTmr(); // 刷新 HID 设备定时器
     void slot_getHIDDeviceIsOpen(bool); // 获取 HID 线程返回是否开启了设备槽函数
     void slot_getRevData(QByteArray data); // 获取 HID 的数据槽函数
-    void slot_getMacroKeyConfig(int macroKey01, int macroKey02, int macroKey11, int macroKey12); // 获取按键宏配置
-    void on_on_offBtn_clicked(); // 打开按钮
+    void slot_getMacrosConfig(QByteArray);// 获取按键宏配置
     void on_DPIMode1Btn_clicked(); // DPI 400 按钮
     void on_DPIMode2Btn_clicked(); // DPI 800 按钮
     void on_DPIMode3Btn_clicked(); // DPI 1600 按钮
@@ -92,11 +90,8 @@ private slots:
     void on_setConfigModeBtn_clicked(); // 设备进入配置模式按钮
     void on_setNormalModeBtn_clicked(); // 设备进入正常模式按钮
     void on_getCurrentDeviceModeBtn_clicked(); // 设备获取当前设备模式按钮
-    void on_getCurrentDPIModeBtn_clicked(); // 设备获取当前 DPI 模式按钮
-    void on_getCurrentRGBModeBtn_clicked(); // 设备获取当前灯效模式按钮
-    void on_getCurrentPowerBtn_clicked(); // 设备获取当前电量按钮
-    void on_setMultiKeyBtn_clicked(); // 设备设置按键宏按钮
-    void on_getMultiKeyBtn_clicked();// 设备获取当前侧键配置
+    void on_setMacroKey1Btn_clicked(); // 设备设置侧键一按键宏按钮
+     void on_setMacroKey2Btn_clicked();// 设备设置侧键二按键宏按钮
     void on_selectHexFileBtn_clicked();// 选择升级文件
     void on_updateButton_clicked();// 点击升级
     void on_closeBtn_clicked(); // 关闭窗口按钮

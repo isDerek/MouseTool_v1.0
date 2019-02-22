@@ -10,19 +10,18 @@ MouseConfigTool::MouseConfigTool(QWidget *parent) :
     ui(new Ui::MouseConfigTool)
 {
     this->setWindowFlag(Qt::FramelessWindowHint); // 隐藏标题栏
-    this->setWindowIcon(QIcon(":/hidmouse/images/mouse_exe.png"));
     this->setFixedSize(1000,750); // 固定窗口大小
-    HIDDeviceIsOpen = false;
+    HIDDeviceIsOpen = false; // 设备初始化未开启
     ui->setupUi(this);
     mainGuiInit(); // 窗口 UI 初始化
-    hiddenMainGui();
-    rfStatusTmr = new QTimer;
+    hiddenMainGui(); // 窗口 UI 隐藏
+    rfStatusTmr = new QTimer; // 查询 HID 设备定时器
+    ui->updateHexName->setReadOnly(true); // USB 升级的文本框只读
     connect(rfStatusTmr, SIGNAL(timeout()), this, SLOT(slot_rfStatusTmr()));
     rfStatusTmr->start(1000);
-    ui->updateHexName->setReadOnly(true);
     connect(&usbReadThread, SIGNAL(postHIDDeviceOpen(bool)), this, SLOT(slot_getHIDDeviceIsOpen(bool)));// 接收线程传来设备是否开启的数据
     connect(&usbReadThread,SIGNAL(postRevData(QByteArray)),this,SLOT(slot_getRevData(QByteArray))); // 接收线程传来的数据
-//    connect(macroKey,SIGNAL(macroKey_signal(int, int, int, int)),this,SLOT(slot_getMacroKeyConfig(int, int, int, int)));
+    connect(macros,SIGNAL(macros_signal(QByteArray)),this,SLOT(slot_getMacrosConfig(QByteArray))); // 接收按键宏配置
 }
 
 MouseConfigTool::~MouseConfigTool()
@@ -56,12 +55,16 @@ void MouseConfigTool::mainGuiInit()
 
 void MouseConfigTool::hiddenMainGui()
 {
-    ui->getMacroKeyGroup->hide();
-    ui->getCurrentDPIGroup->hide();
-    ui->getCurrentLEDGroup->hide();
     ui->getDriverModeGroup->hide();
-    ui->getCurrentPowerGroup->hide();
     ui->setDriverModeGroup->hide();
+
+    ui->mouseStatus->hide();
+    ui->mouseBtn->hide();
+    ui->usbUpdateGroup->hide();
+    ui->currentDPIGroup->hide();
+    ui->currentLEDGroup->hide();
+    ui->marcroKeyGroup->hide();
+    ui->missDeviceLabel->hide();
 }
 
 void MouseConfigTool::mouseMoveEvent(QMouseEvent *event)
@@ -106,6 +109,7 @@ void MouseConfigTool::paintEvent(QPaintEvent *)
     setMask(bmp);
 
     ui->closeBtn->setCursor(QCursor(Qt::PointingHandCursor)); // 鼠标移动到窗口关闭按钮样式
+    ui->configBtn->setCursor(QCursor(Qt::PointingHandCursor)); // 鼠标移动到设置按钮样式
 }
 
 void MouseConfigTool::Delay_Msec(int msec)
@@ -177,8 +181,23 @@ void MouseConfigTool::StringToHex(QString str, QByteArray &sendData)
 void MouseConfigTool::slot_rfStatusTmr()
 {
     getHIDDevceInfo();
-    setComboHIDBox();
     clearHIDDeviceInfoList();
+    // 找到指定设备，并打开，向设备请求当前鼠标状态
+    if(HIDDeviceIsOpen && getCurrentMouseStatusFlag)
+    {
+        userModePro.getMouseCurrentStatus();
+        getCurrentMouseStatusFlag = false;
+        ui->mouseStatus->show();
+        ui->mouseBtn->show();
+        ui->usbUpdateGroup->show();
+        ui->currentDPIGroup->show();
+        ui->currentLEDGroup->show();
+        ui->marcroKeyGroup->show();
+        ui->missDeviceLabel->hide();
+    }
+    else if( !HIDDeviceIsOpen && getCurrentMouseStatusFlag){
+        ui->missDeviceLabel->show();
+    }
 }
 
 void MouseConfigTool::getHIDDevceInfo()
@@ -197,7 +216,11 @@ void MouseConfigTool::getHIDDevceInfo()
     {
         usbReadThread.getOpenHIDDevice(52736,1165,!HIDDeviceIsOpen);// 调用线程函数去传递数据
         usbReadThread.start();
-        rfStatusTmr->stop();
+        // 若指定设备开启成功，则关闭查询 HID 设备定时器
+        if(HIDDeviceIsOpen)
+        {
+            rfStatusTmr->stop();
+        }
         break;
     }
     sprintf(HID,"VID:%x PID:%x",cur_dev->vendor_id,cur_dev->product_id);
@@ -234,33 +257,7 @@ void MouseConfigTool::getHIDDevceInfo()
      hid_free_enumeration(devs);
 }
 
-void MouseConfigTool::setComboHIDBox()
-{
-    QStringList portItems;
-    int portItemsCounts;
-    if(! HIDDeviceList.isEmpty())
-    {
-        portItemsCounts = ui->comboHIDBox->count();
-        for(int i = 0; i<portItemsCounts;i++)
-        {
-            portItems.append(ui->comboHIDBox->itemText(i));
-        }
-        if(portItems == HIDDeviceList)
-        {
-            return;
-        }
-        else
-        {
-          ui->comboHIDBox->clear();
-          ui->comboHIDBox->addItems(HIDDeviceList);
-        }
-    }
-    // 如果沒扫到 HID 设备，清空 HID 设备下拉框
-    else
-    {
-        ui->comboHIDBox->clear();
-    }
-}
+
 
 
 void MouseConfigTool::clearHIDDeviceInfoList()
@@ -472,40 +469,17 @@ unsigned short MouseConfigTool::HexStrToUShort(QString str, int length)
 }
 
 
-void MouseConfigTool::on_on_offBtn_clicked()
-{
-    unsigned short currentPID, currentVID;
-
-    QString currentPIDText,currentVIDText;
-    currentPIDText = ui->PIDLineEdit->text();
-    currentVIDText = ui->VIDLineEdit->text();
-//  下拉框选择端口打开，但是打开端口后，当前的串口并不能扫描出来，已被占用，显示有问题
-//    currentPIDText = ui->comboHIDBox->currentText().right(4);
-//    currentVIDText = ui->comboHIDBox->currentText().mid(4,4).simplified();
-//    qDebug()<<currentPIDText;
-//    qDebug()<<currentVIDText;
-    currentPID = HexStrToUShort(currentPIDText,currentPIDText.length());
-    currentVID = HexStrToUShort(currentVIDText,currentVIDText.length());
-    usbReadThread.getOpenHIDDevice(currentPID,currentVID,!HIDDeviceIsOpen);// 调用线程函数去传递数据
-    usbReadThread.start();
-}
 // 线程传递回来的设备是否开启参数，改变 UI 的开启关闭状态，同时将设备状态保存在当前类中
 void MouseConfigTool::slot_getHIDDeviceIsOpen(bool isOpen)
 {
     HIDDeviceIsOpen = isOpen;
     if(isOpen)
     {
-        ui->on_offBtn->setText("关闭");
-        ui->PIDLineEdit->setEnabled(false);
-        ui->VIDLineEdit->setEnabled(false);
         HIDDeviceIsOpen = true;
     }
     else
     {
         HIDDeviceIsOpen = false;
-        ui->on_offBtn->setText("打开");
-        ui->PIDLineEdit->setEnabled(true);
-        ui->VIDLineEdit->setEnabled(true);
     }
 }
 
@@ -605,11 +579,18 @@ void MouseConfigTool::on_setNormalModeBtn_clicked()
     }
 }
 
-void MouseConfigTool::slot_getMacroKeyConfig(int macroKey01, int macroKey02, int macroKey11, int macroKey12)
+void MouseConfigTool::slot_getMacrosConfig(QByteArray data)
 {
     if(HIDDeviceIsOpen)
     {
-        userModePro.postMacroKeyNotify(macroKey01,macroKey02,macroKey11,macroKey12);
+        switch (macroKey) {
+            case 1: userModePro.postMacrosNotify(data,macroKey);
+                break;
+            case 2: userModePro.postMacrosNotify(data,macroKey);
+                break;
+            default: break;
+        }
+        macroKey = 0;
     }
 }
 
@@ -621,45 +602,21 @@ void MouseConfigTool::on_getCurrentDeviceModeBtn_clicked()
     }
 }
 
-void MouseConfigTool::on_getCurrentDPIModeBtn_clicked()
+void MouseConfigTool::on_setMacroKey1Btn_clicked()
 {
     if(HIDDeviceIsOpen)
     {
-        userModePro.getCurrentDPIMode();
-    }
-}
-
-void MouseConfigTool::on_getCurrentRGBModeBtn_clicked()
-{
-    if(HIDDeviceIsOpen)
-    {
-        userModePro.getCurrentRGBMode();
-    }
-}
-
-void MouseConfigTool::on_getCurrentPowerBtn_clicked()
-{
-    if(HIDDeviceIsOpen)
-    {
-        userModePro.getCurrentPower();
-    }
-}
-
-void MouseConfigTool::on_setMultiKeyBtn_clicked()
-{
-    if(HIDDeviceIsOpen)
-    {
-//        macroKey->show();
+        macroKey = 1;
         macros->show();
     }
 }
 
-
-void MouseConfigTool::on_getMultiKeyBtn_clicked()
+void MouseConfigTool::on_setMacroKey2Btn_clicked()
 {
     if(HIDDeviceIsOpen)
     {
-        userModePro.getCurrentMacroKeyConfig();
+        macroKey = 2;
+        macros->show();
     }
 }
 
@@ -699,3 +656,5 @@ void MouseConfigTool::on_closeBtn_clicked()
 {
     close();
 }
+
+

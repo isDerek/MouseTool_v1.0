@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>421</width>
-    <height>402</height>
+    <width>450</width>
+    <height>400</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -42,10 +42,10 @@
   <widget class="QTabWidget" name="keyFuc">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>10</y>
-     <width>411</width>
-     <height>341</height>
+     <x>-10</x>
+     <y>0</y>
+     <width>465</width>
+     <height>351</height>
     </rect>
    </property>
    <property name="currentIndex">
@@ -60,6 +60,146 @@
     <attribute name="title">
      <string>按键</string>
     </attribute>
+    <widget class="QRadioButton" name="closeWindowsBtn">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>49</y>
+       <width>261</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>关闭窗口 (Alt + F4)</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="showWindowsBtn">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>80</y>
+       <width>301</width>
+       <height>19</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>显示桌面 (Windows 键 + D)</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="nextWebBtn">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>110</y>
+       <width>301</width>
+       <height>19</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>浏览器中的下一个标签 (Ctrl + Tab)</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="beforeWebBtn">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>140</y>
+       <width>341</width>
+       <height>19</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>浏览器中的上一个标签 (Ctrl + Shift + Tab)</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="resetScaleBtn">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>170</y>
+       <width>291</width>
+       <height>19</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>恢复默认缩放比例 (Ctrl + 0)</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="cutBtn">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>200</y>
+       <width>291</width>
+       <height>19</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>剪切 (Ctrl + X)</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="copyBtn">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>230</y>
+       <width>291</width>
+       <height>19</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>复制 (Ctrl + C)</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="pasteBtn">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>260</y>
+       <width>291</width>
+       <height>19</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>粘贴 (Ctrl + V)</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="resetBtn">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>290</y>
+       <width>291</width>
+       <height>19</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>重做 (Ctrl + Y)</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="showKeyText">
+     <property name="geometry">
+      <rect>
+       <x>140</x>
+       <y>10</y>
+       <width>191</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>10</y>
+       <width>91</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>设定的按键：</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="tab_2">
     <attribute name="title">
@@ -68,8 +208,8 @@
     <widget class="QTextEdit" name="keyText">
      <property name="geometry">
       <rect>
-       <x>0</x>
-       <y>0</y>
+       <x>20</x>
+       <y>10</y>
        <width>221</width>
        <height>311</height>
       </rect>
@@ -78,7 +218,7 @@
     <widget class="QCheckBox" name="recordHandlerTmr">
      <property name="geometry">
       <rect>
-       <x>230</x>
+       <x>260</x>
        <y>10</y>
        <width>171</width>
        <height>19</height>
@@ -91,7 +231,7 @@
     <widget class="QPushButton" name="startRecordBtn">
      <property name="geometry">
       <rect>
-       <x>230</x>
+       <x>260</x>
        <y>40</y>
        <width>93</width>
        <height>28</height>

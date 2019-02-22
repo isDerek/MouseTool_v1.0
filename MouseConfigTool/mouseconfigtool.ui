@@ -20,164 +20,6 @@
    <enum>QTabWidget::Rounded</enum>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QGroupBox" name="getCurrentPowerGroup">
-    <property name="geometry">
-     <rect>
-      <x>610</x>
-      <y>590</y>
-      <width>150</width>
-      <height>111</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>150</width>
-      <height>0</height>
-     </size>
-    </property>
-    <property name="maximumSize">
-     <size>
-      <width>150</width>
-      <height>16777215</height>
-     </size>
-    </property>
-    <property name="title">
-     <string>获取当前电量</string>
-    </property>
-    <widget class="QPushButton" name="getCurrentPowerBtn">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>30</y>
-       <width>93</width>
-       <height>28</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>当前电量</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="currentPowerText">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>70</y>
-       <width>111</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>当前电量 Text</string>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QGroupBox" name="usbConfigGroup">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>160</y>
-      <width>350</width>
-      <height>200</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>350</width>
-      <height>200</height>
-     </size>
-    </property>
-    <property name="maximumSize">
-     <size>
-      <width>350</width>
-      <height>200</height>
-     </size>
-    </property>
-    <property name="title">
-     <string>USB 配置</string>
-    </property>
-    <widget class="QLabel" name="label">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>30</y>
-       <width>72</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>HID 设备</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="on_offBtn">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>130</y>
-       <width>93</width>
-       <height>28</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>打开</string>
-     </property>
-    </widget>
-    <widget class="QComboBox" name="comboHIDBox">
-     <property name="geometry">
-      <rect>
-       <x>100</x>
-       <y>30</y>
-       <width>171</width>
-       <height>22</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_12">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>60</y>
-       <width>72</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>VID：</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_13">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>90</y>
-       <width>72</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>PID:</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="VIDLineEdit">
-     <property name="geometry">
-      <rect>
-       <x>100</x>
-       <y>60</y>
-       <width>113</width>
-       <height>21</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="PIDLineEdit">
-     <property name="geometry">
-      <rect>
-       <x>100</x>
-       <y>90</y>
-       <width>113</width>
-       <height>21</height>
-      </rect>
-     </property>
-    </widget>
-   </widget>
    <widget class="QGroupBox" name="usbUpdateGroup">
     <property name="geometry">
      <rect>
@@ -209,7 +51,7 @@
      <item row="0" column="2">
       <widget class="QPushButton" name="selectHexFileBtn">
        <property name="text">
-        <string>选择升级文件</string>
+        <string>选择Hex文件</string>
        </property>
       </widget>
      </item>
@@ -232,99 +74,11 @@
      </item>
     </layout>
    </widget>
-   <widget class="QGroupBox" name="getCurrentDPIGroup">
-    <property name="geometry">
-     <rect>
-      <x>500</x>
-      <y>320</y>
-      <width>150</width>
-      <height>121</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>150</width>
-      <height>0</height>
-     </size>
-    </property>
-    <property name="maximumSize">
-     <size>
-      <width>150</width>
-      <height>16777215</height>
-     </size>
-    </property>
-    <property name="title">
-     <string>获取当前 DPI</string>
-    </property>
-    <layout class="QVBoxLayout" name="verticalLayout_3">
-     <item>
-      <widget class="QPushButton" name="getCurrentDPIModeBtn">
-       <property name="text">
-        <string>当前 DPI</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="currentDPIText">
-       <property name="text">
-        <string>当前 DPI Text</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QGroupBox" name="getCurrentLEDGroup">
-    <property name="geometry">
-     <rect>
-      <x>490</x>
-      <y>450</y>
-      <width>150</width>
-      <height>121</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>150</width>
-      <height>0</height>
-     </size>
-    </property>
-    <property name="maximumSize">
-     <size>
-      <width>150</width>
-      <height>16777215</height>
-     </size>
-    </property>
-    <property name="title">
-     <string>获取当前灯效</string>
-    </property>
-    <layout class="QVBoxLayout" name="verticalLayout_6">
-     <item>
-      <widget class="QPushButton" name="getCurrentRGBModeBtn">
-       <property name="text">
-        <string>当前灯效</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="currentLEDText">
-       <property name="minimumSize">
-        <size>
-         <width>100</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="text">
-        <string>当前灯效 Text</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
    <widget class="QGroupBox" name="getDriverModeGroup">
     <property name="geometry">
      <rect>
-      <x>380</x>
-      <y>160</y>
+      <x>170</x>
+      <y>450</y>
       <width>176</width>
       <height>120</height>
      </rect>
@@ -346,102 +100,13 @@
        </property>
       </widget>
      </item>
-     <item>
-      <widget class="QLabel" name="currentModeText">
-       <property name="text">
-        <string>当前模式 Text</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QGroupBox" name="getMacroKeyGroup">
-    <property name="geometry">
-     <rect>
-      <x>510</x>
-      <y>10</y>
-      <width>150</width>
-      <height>120</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>150</width>
-      <height>0</height>
-     </size>
-    </property>
-    <property name="maximumSize">
-     <size>
-      <width>150</width>
-      <height>120</height>
-     </size>
-    </property>
-    <property name="title">
-     <string>获取按键宏</string>
-    </property>
-    <layout class="QGridLayout" name="gridLayout_5">
-     <item row="0" column="0">
-      <widget class="QPushButton" name="getMultiKeyBtn">
-       <property name="text">
-        <string>当前侧键</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="marcoKey1Text">
-       <property name="text">
-        <string>侧键一：</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="marcoKey2Text">
-       <property name="text">
-        <string>侧键二：</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QGroupBox" name="marcroKeyGroup">
-    <property name="geometry">
-     <rect>
-      <x>790</x>
-      <y>600</y>
-      <width>200</width>
-      <height>100</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>200</width>
-      <height>100</height>
-     </size>
-    </property>
-    <property name="maximumSize">
-     <size>
-      <width>200</width>
-      <height>100</height>
-     </size>
-    </property>
-    <property name="title">
-     <string>设置按键宏</string>
-    </property>
-    <layout class="QVBoxLayout" name="verticalLayout_5">
-     <item>
-      <widget class="QPushButton" name="setMultiKeyBtn">
-       <property name="text">
-        <string>按键宏</string>
-       </property>
-      </widget>
-     </item>
     </layout>
    </widget>
    <widget class="QGroupBox" name="setDriverModeGroup">
     <property name="geometry">
      <rect>
-      <x>350</x>
-      <y>10</y>
+      <x>10</x>
+      <y>450</y>
       <width>150</width>
       <height>100</height>
      </rect>
@@ -500,7 +165,7 @@
      </size>
     </property>
     <property name="title">
-     <string>当前 DPI</string>
+     <string>设置 DPI</string>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_2">
      <item>
@@ -555,7 +220,7 @@
      </size>
     </property>
     <property name="title">
-     <string>当前灯效</string>
+     <string>设置灯效</string>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
@@ -620,8 +285,8 @@
    <widget class="QPushButton" name="mouseBtn">
     <property name="geometry">
      <rect>
-      <x>90</x>
-      <y>370</y>
+      <x>350</x>
+      <y>320</y>
       <width>241</width>
       <height>331</height>
      </rect>
@@ -629,6 +294,164 @@
     <property name="text">
      <string/>
     </property>
+   </widget>
+   <widget class="QPushButton" name="configBtn">
+    <property name="geometry">
+     <rect>
+      <x>850</x>
+      <y>50</y>
+      <width>51</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QGroupBox" name="mouseStatus">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>150</y>
+      <width>241</width>
+      <height>281</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>鼠标状态</string>
+    </property>
+    <widget class="QLabel" name="currentPowerText">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>40</y>
+       <width>72</width>
+       <height>15</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>当前电量：</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="currentLEDText">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>80</y>
+       <width>72</width>
+       <height>15</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>当前灯效：</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="currentDPIText">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>120</y>
+       <width>72</width>
+       <height>15</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>当前 DPI：</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="macroKey1Text">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>159</y>
+       <width>71</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>侧键一：</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="macroKey2Text">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>195</y>
+       <width>72</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>侧键二：</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QLabel" name="missDeviceLabel">
+    <property name="geometry">
+     <rect>
+      <x>330</x>
+      <y>330</y>
+      <width>351</width>
+      <height>111</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>未找到指定设备</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QGroupBox" name="marcroKeyGroup">
+    <property name="geometry">
+     <rect>
+      <x>840</x>
+      <y>590</y>
+      <width>150</width>
+      <height>110</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>150</width>
+      <height>110</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>150</width>
+      <height>110</height>
+     </size>
+    </property>
+    <property name="title">
+     <string>设置按键宏</string>
+    </property>
+    <widget class="QPushButton" name="setMacroKey1Btn">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>30</y>
+       <width>99</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>侧键一按键宏</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="setMacroKey2Btn">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>70</y>
+       <width>99</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>侧键二按键宏</string>
+     </property>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">

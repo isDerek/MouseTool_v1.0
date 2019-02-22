@@ -9,7 +9,9 @@
         <file>images/wpi_logo_hover.png</file>
         <file>images/close.png</file>
         <file>images/close_hover.png</file>
-        <file>images/mouse_exe.icon</file>
         <file>images/mouse.jpg</file>
+        <file>images/mouseKey.png</file>
+        <file>images/config.png</file>
+        <file>images/config_hover.png</file>
     </qresource>
 </RCC>

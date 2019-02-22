@@ -8,14 +8,19 @@ QLabel#wpiLogo{
 QPushButton#mouseBtn{
     border-image: url(:/hidmouse/images/mouse.jpg);
 }
-QLabel#wpiLogo::hover{
-    border-image: url(:/hidmouse/images/wpi_logo_hover.png);
+
+QPushButton#configBtn{
+    border-image: url(:/hidmouse/images/config.png);
+    background-color:none;
 }
 
-QLabel#filePathText{
-    font-size:15px;
-    color:white;
-    font-weight:bold;
+QPushButton#configBtn:hover{
+    border-image: url(:/hidmouse/images/config_hover.png);
+    background-color:none;
+}
+
+QLabel#wpiLogo:hover{
+    border-image: url(:/hidmouse/images/wpi_logo_hover.png);
 }
 
 QPushButton#closeBtn{
@@ -24,7 +29,7 @@ QPushButton#closeBtn{
     border:none;
 }
 
-QPushButton#closeBtn::hover{
+QPushButton#closeBtn:hover{
     border-image: url(:/hidmouse/images/close_hover.png);
     background-color:none;
     border:none;
@@ -51,3 +56,14 @@ QPushButton::hover{
     color:white;
 }
 
+QLabel{
+    font-size:15px;
+    color:white;
+    font-weight:bold;
+}
+
+QLabel#missDeviceLabel{
+    font-size:40px;
+    color:white;
+    font-weight:bold;
+}

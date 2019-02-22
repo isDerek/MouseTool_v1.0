@@ -76,7 +76,7 @@ void USBReadThread::getProtocolData(QByteArray data)
     for(int i=0;i<65;i++)
     {
         sendBuf[i] = data[i];
-//         qDebug()<<sendBuf[i];
+         qDebug()<<sendBuf[i];
     }
     hid_write(handle,sendBuf,65);// 65 是因为 QN9080 智迪协议上是 1 个 Report ID + 64 Bytes 数据
 }

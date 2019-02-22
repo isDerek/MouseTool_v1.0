@@ -7,5 +7,4 @@ debug/macros.o
 debug/qrc_resource.o
 debug/moc_mouseconfigtool.o
 debug/moc_usbreadthread.o
-debug/moc_macrokey.o
 debug/moc_macros.o

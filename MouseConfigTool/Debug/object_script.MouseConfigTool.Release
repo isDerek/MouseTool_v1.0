@@ -7,5 +7,4 @@ release/macros.o
 release/qrc_resource.o
 release/moc_mouseconfigtool.o
 release/moc_usbreadthread.o
-release/moc_macrokey.o
 release/moc_macros.o

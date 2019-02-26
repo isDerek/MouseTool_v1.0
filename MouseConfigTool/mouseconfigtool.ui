@@ -20,60 +20,6 @@
    <enum>QTabWidget::Rounded</enum>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QGroupBox" name="usbUpdateGroup">
-    <property name="geometry">
-     <rect>
-      <x>570</x>
-      <y>160</y>
-      <width>420</width>
-      <height>102</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>420</width>
-      <height>0</height>
-     </size>
-    </property>
-    <property name="maximumSize">
-     <size>
-      <width>420</width>
-      <height>16777215</height>
-     </size>
-    </property>
-    <property name="title">
-     <string>USB 升级</string>
-    </property>
-    <property name="flat">
-     <bool>false</bool>
-    </property>
-    <layout class="QGridLayout" name="gridLayout_4">
-     <item row="0" column="2">
-      <widget class="QPushButton" name="selectHexFileBtn">
-       <property name="text">
-        <string>选择Hex文件</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="2">
-      <widget class="QPushButton" name="updateButton">
-       <property name="text">
-        <string>升级</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QLineEdit" name="updateHexName"/>
-     </item>
-     <item row="0" column="0">
-      <widget class="QLabel" name="filePathText">
-       <property name="text">
-        <string>文件路径：</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
    <widget class="QGroupBox" name="getDriverModeGroup">
     <property name="geometry">
      <rect>
@@ -351,8 +297,8 @@
       <rect>
        <x>20</x>
        <y>120</y>
-       <width>72</width>
-       <height>15</height>
+       <width>81</width>
+       <height>16</height>
       </rect>
      </property>
      <property name="text">

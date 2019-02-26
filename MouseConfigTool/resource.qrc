@@ -2,6 +2,7 @@
     <qresource prefix="/qss">
         <file>qss/mainWindows.qss</file>
         <file>qss/macrokey.qss</file>
+        <file>qss/setting.qss</file>
     </qresource>
     <qresource prefix="/hidmouse">
         <file>images/mainWindows.jpg</file>

@@ -40,7 +40,7 @@ public:
     QRadioButton *pasteBtn;
     QRadioButton *resetBtn;
     QLineEdit *showKeyText;
-    QLabel *label;
+    QLabel *setKeyLabel;
     QWidget *tab_2;
     QTextEdit *keyText;
     QCheckBox *recordHandlerTmr;
@@ -95,9 +95,9 @@ public:
         showKeyText = new QLineEdit(tab_3);
         showKeyText->setObjectName(QString::fromUtf8("showKeyText"));
         showKeyText->setGeometry(QRect(140, 10, 191, 31));
-        label = new QLabel(tab_3);
-        label->setObjectName(QString::fromUtf8("label"));
-        label->setGeometry(QRect(40, 10, 91, 31));
+        setKeyLabel = new QLabel(tab_3);
+        setKeyLabel->setObjectName(QString::fromUtf8("setKeyLabel"));
+        setKeyLabel->setGeometry(QRect(40, 10, 91, 31));
         keyFuc->addTab(tab_3, QString());
         tab_2 = new QWidget();
         tab_2->setObjectName(QString::fromUtf8("tab_2"));
@@ -114,7 +114,7 @@ public:
 
         retranslateUi(Macros);
 
-        keyFuc->setCurrentIndex(2);
+        keyFuc->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(Macros);
@@ -135,7 +135,7 @@ public:
         copyBtn->setText(QApplication::translate("Macros", "\345\244\215\345\210\266 (Ctrl + C)", nullptr));
         pasteBtn->setText(QApplication::translate("Macros", "\347\262\230\350\264\264 (Ctrl + V)", nullptr));
         resetBtn->setText(QApplication::translate("Macros", "\351\207\215\345\201\232 (Ctrl + Y)", nullptr));
-        label->setText(QApplication::translate("Macros", "\350\256\276\345\256\232\347\232\204\346\214\211\351\224\256\357\274\232", nullptr));
+        setKeyLabel->setText(QApplication::translate("Macros", "\350\256\276\345\256\232\347\232\204\346\214\211\351\224\256\357\274\232", nullptr));
         keyFuc->setTabText(keyFuc->indexOf(tab_3), QApplication::translate("Macros", "\346\214\211\351\224\256", nullptr));
         recordHandlerTmr->setText(QApplication::translate("Macros", "\350\256\260\345\275\225\344\272\213\344\273\266\344\271\213\351\227\264\347\232\204\345\273\266\350\277\237", nullptr));
         startRecordBtn->setText(QApplication::translate("Macros", "\345\274\200\345\247\213\345\275\225\345\210\266", nullptr));

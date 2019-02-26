@@ -1,0 +1,11 @@
+debug/main.o
+debug/mouseconfigtool.o
+debug/usbreadthread.o
+debug/usermodepro.o
+debug/macros.o
+debug/config.o
+debug/qrc_resource.o
+debug/moc_mouseconfigtool.o
+debug/moc_usbreadthread.o
+debug/moc_macros.o
+debug/moc_config.o

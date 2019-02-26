@@ -1,0 +1,25 @@
+QLabel#filePathText{
+    color:black;
+    font-weight: normal;
+}
+
+QPushButton{
+    background-color:#666;
+    color:white;
+}
+
+QPushButton::hover{
+    background-color:#888;
+    color:white;
+}
+
+QGroupBox#usbUpdateGroup{
+    color:black;
+    border: 1px solid black;
+    font-size:20px;
+    font-weight:normal;
+}
+
+QLineEdit#updateHexName{
+    border: 1px solid black;
+}

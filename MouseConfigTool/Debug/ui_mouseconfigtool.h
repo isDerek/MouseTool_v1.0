@@ -11,10 +11,8 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QLabel>
-#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
@@ -27,12 +25,6 @@ class Ui_MouseConfigTool
 {
 public:
     QWidget *centralWidget;
-    QGroupBox *usbUpdateGroup;
-    QGridLayout *gridLayout_4;
-    QPushButton *selectHexFileBtn;
-    QPushButton *updateButton;
-    QLineEdit *updateHexName;
-    QLabel *filePathText;
     QGroupBox *getDriverModeGroup;
     QVBoxLayout *verticalLayout_7;
     QPushButton *getCurrentDeviceModeBtn;
@@ -77,36 +69,6 @@ public:
         MouseConfigTool->setTabShape(QTabWidget::Rounded);
         centralWidget = new QWidget(MouseConfigTool);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
-        usbUpdateGroup = new QGroupBox(centralWidget);
-        usbUpdateGroup->setObjectName(QString::fromUtf8("usbUpdateGroup"));
-        usbUpdateGroup->setGeometry(QRect(570, 160, 420, 102));
-        usbUpdateGroup->setMinimumSize(QSize(420, 0));
-        usbUpdateGroup->setMaximumSize(QSize(420, 16777215));
-        usbUpdateGroup->setFlat(false);
-        gridLayout_4 = new QGridLayout(usbUpdateGroup);
-        gridLayout_4->setSpacing(6);
-        gridLayout_4->setContentsMargins(11, 11, 11, 11);
-        gridLayout_4->setObjectName(QString::fromUtf8("gridLayout_4"));
-        selectHexFileBtn = new QPushButton(usbUpdateGroup);
-        selectHexFileBtn->setObjectName(QString::fromUtf8("selectHexFileBtn"));
-
-        gridLayout_4->addWidget(selectHexFileBtn, 0, 2, 1, 1);
-
-        updateButton = new QPushButton(usbUpdateGroup);
-        updateButton->setObjectName(QString::fromUtf8("updateButton"));
-
-        gridLayout_4->addWidget(updateButton, 1, 2, 1, 1);
-
-        updateHexName = new QLineEdit(usbUpdateGroup);
-        updateHexName->setObjectName(QString::fromUtf8("updateHexName"));
-
-        gridLayout_4->addWidget(updateHexName, 0, 1, 1, 1);
-
-        filePathText = new QLabel(usbUpdateGroup);
-        filePathText->setObjectName(QString::fromUtf8("filePathText"));
-
-        gridLayout_4->addWidget(filePathText, 0, 0, 1, 1);
-
         getDriverModeGroup = new QGroupBox(centralWidget);
         getDriverModeGroup->setObjectName(QString::fromUtf8("getDriverModeGroup"));
         getDriverModeGroup->setGeometry(QRect(170, 450, 176, 120));
@@ -221,7 +183,7 @@ public:
         currentLEDText->setGeometry(QRect(20, 80, 72, 15));
         currentDPIText = new QLabel(mouseStatus);
         currentDPIText->setObjectName(QString::fromUtf8("currentDPIText"));
-        currentDPIText->setGeometry(QRect(20, 120, 72, 15));
+        currentDPIText->setGeometry(QRect(20, 120, 81, 16));
         macroKey1Text = new QLabel(mouseStatus);
         macroKey1Text->setObjectName(QString::fromUtf8("macroKey1Text"));
         macroKey1Text->setGeometry(QRect(20, 159, 71, 21));
@@ -257,10 +219,6 @@ public:
     void retranslateUi(QMainWindow *MouseConfigTool)
     {
         MouseConfigTool->setWindowTitle(QApplication::translate("MouseConfigTool", "MouseConfigTool", nullptr));
-        usbUpdateGroup->setTitle(QApplication::translate("MouseConfigTool", "USB \345\215\207\347\272\247", nullptr));
-        selectHexFileBtn->setText(QApplication::translate("MouseConfigTool", "\351\200\211\346\213\251Hex\346\226\207\344\273\266", nullptr));
-        updateButton->setText(QApplication::translate("MouseConfigTool", "\345\215\207\347\272\247", nullptr));
-        filePathText->setText(QApplication::translate("MouseConfigTool", "\346\226\207\344\273\266\350\267\257\345\276\204\357\274\232", nullptr));
         getDriverModeGroup->setTitle(QApplication::translate("MouseConfigTool", "\350\216\267\345\217\226\345\275\223\345\211\215 Driver \346\250\241\345\274\217", nullptr));
         getCurrentDeviceModeBtn->setText(QApplication::translate("MouseConfigTool", "\345\275\223\345\211\215\346\250\241\345\274\217", nullptr));
         setDriverModeGroup->setTitle(QApplication::translate("MouseConfigTool", "\350\256\276\347\275\256 Driver \346\250\241\345\274\217", nullptr));

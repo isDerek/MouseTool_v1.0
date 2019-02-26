@@ -16,7 +16,6 @@ MouseConfigTool::MouseConfigTool(QWidget *parent) :
     mainGuiInit(); // 窗口 UI 初始化
     hiddenMainGui(); // 窗口 UI 隐藏
     rfStatusTmr = new QTimer; // 查询 HID 设备定时器
-    ui->updateHexName->setReadOnly(true); // USB 升级的文本框只读
     connect(rfStatusTmr, SIGNAL(timeout()), this, SLOT(slot_rfStatusTmr()));
     rfStatusTmr->start(1000);
     connect(&usbReadThread, SIGNAL(postHIDDeviceOpen(bool)), this, SLOT(slot_getHIDDeviceIsOpen(bool)));// 接收线程传来设备是否开启的数据
@@ -49,8 +48,17 @@ void MouseConfigTool::mainGuiInit()
     styleSheet = QString(macroKeyQssFile->readAll());
     // 为 QApplication 设置样式表
     macroKeyQssFile->close();
-//    macroKey->setStyleSheet(styleSheet);
+    macros->setStyleSheet(styleSheet);
 
+    // 设置界面 qss 文件载入
+    settingQssFile = new QFile(":/qss/qss/setting.qss",this);
+    // 只读方式打开该文件
+    settingQssFile->open(QFile::ReadOnly);
+    // 读取文件全部内容
+    styleSheet = QString(settingQssFile->readAll());
+    // 为 QApplication 设置样式表
+    settingQssFile->close();
+    config->setStyleSheet(styleSheet);
 }
 
 void MouseConfigTool::hiddenMainGui()
@@ -60,7 +68,6 @@ void MouseConfigTool::hiddenMainGui()
 
     ui->mouseStatus->hide();
     ui->mouseBtn->hide();
-    ui->usbUpdateGroup->hide();
     ui->currentDPIGroup->hide();
     ui->currentLEDGroup->hide();
     ui->marcroKeyGroup->hide();
@@ -189,7 +196,6 @@ void MouseConfigTool::slot_rfStatusTmr()
         getCurrentMouseStatusFlag = false;
         ui->mouseStatus->show();
         ui->mouseBtn->show();
-        ui->usbUpdateGroup->show();
         ui->currentDPIGroup->show();
         ui->currentLEDGroup->show();
         ui->marcroKeyGroup->show();
@@ -212,9 +218,11 @@ void MouseConfigTool::getHIDDevceInfo()
  //        qDebug("Device Found\n  type: %04hx %04hx\n  path: %s\n  serial_number: %ls", cur_dev->vendor_id, cur_dev->product_id, cur_dev->path, cur_dev->serial_number);
  //        qDebug("\n");
     // 查找到指定设备打开设备
-    if(cur_dev->vendor_id == 1165 && cur_dev->product_id == 52736)
+//    if(cur_dev->vendor_id == 1165 && cur_dev->product_id == 52736)
+    if(cur_dev->vendor_id == 6785 && cur_dev->product_id == 8247)
     {
-        usbReadThread.getOpenHIDDevice(52736,1165,!HIDDeviceIsOpen);// 调用线程函数去传递数据
+        usbReadThread.getOpenHIDDevice(8247,6785,!HIDDeviceIsOpen);// 调用线程函数去传递数据
+//        usbReadThread.getOpenHIDDevice(52736,1165,!HIDDeviceIsOpen);// 调用线程函数去传递数据
         usbReadThread.start();
         // 若指定设备开启成功，则关闭查询 HID 设备定时器
         if(HIDDeviceIsOpen)
@@ -364,31 +372,6 @@ void MouseConfigTool::hexSizeToLHStr(int ndata, QByteArrayList &aldata)
 //    qDebug()<<"data 1:"<<aldata[1];
 //    qDebug()<<"data 0:"<<aldata[0];
 }
-void MouseConfigTool::hexFileHandler()
-{
-    QFile file;
-    QString f = QFileDialog::getOpenFileName(this,QString("选择升级文件"),QString("./"));
-    file.setFileName(f);
-    if(file.open(QIODevice::ReadOnly | QIODevice::Text))
-    {
-        QByteArray bufferLine;   // 读取文件每一行
-        int HexSize = 0;
-        alBufferLine.clear(); // 清空之前的 Buffer
-        ui->updateHexName->setText(f);
-        while(!file.atEnd())
-        {
-            bufferLine = file.readLine();
-            bufferLine.remove(0,1);// 去掉冒号
-            bufferLine.remove(bufferLine.size()-1,1);//过滤换行符
-            HexSize += bufferLine.size();
-            alBufferLine.append(bufferLine);
-
-        }
-        HexSize = HexSize / 2;
-        hexSizeToLHStr(HexSize,alLHBufferSize);
-        file.close();
-    }
-}
 
 void MouseConfigTool::BinToInt(QByteArray &data, QString strBin)
 {
@@ -414,6 +397,7 @@ void MouseConfigTool::BinToInt(QByteArray &data, QString strBin)
     decimal = QString::number(nDec);
     data = decimal.toLatin1();
 }
+
 void MouseConfigTool::IntToBin(int data, QByteArray &binData)
 {
     int nYushu, nShang;
@@ -620,35 +604,11 @@ void MouseConfigTool::on_setMacroKey2Btn_clicked()
     }
 }
 
-void MouseConfigTool::on_selectHexFileBtn_clicked()
+void MouseConfigTool::on_configBtn_clicked()
 {
     if(HIDDeviceIsOpen)
     {
-        hexFileHandler();
-    }
-}
-
-void MouseConfigTool::on_updateButton_clicked()
-{
-    if(HIDDeviceIsOpen)
-    {
-        QString sBufferLine;
-        QByteArray SendData;
-        int nBufferLineIndex = 0;
-        nBufferLineIndex = alBufferLine.size() - 1;
-        userModePro.postEnterBootLoaderMode();
-        userModePro.postUpdateDeviceInfo(alLHBufferSize);
-        for(int i=0 ; i< alBufferLine.size(); i++)
-        {
-            bufferCountsToLHStr(nBufferLineIndex--,alLHBufferIndex);
-            sBufferLine = alBufferLine[i];
-            StringToHex(sBufferLine,SendData);
-            userModePro.postUpdateFW(alLHBufferIndex, SendData);
-        }
-        userModePro.postExitBootLoaderMode();
-        ui->updateHexName->clear();// 清空 Hex 文件路径
-        alBufferLine.clear(); // 清空之前的 Buffer
-        SendData.clear(); // 清空数据
+        config->show();
     }
 }
 
@@ -656,5 +616,7 @@ void MouseConfigTool::on_closeBtn_clicked()
 {
     close();
 }
+
+
 
 

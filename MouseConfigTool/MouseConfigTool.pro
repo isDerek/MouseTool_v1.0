@@ -29,19 +29,21 @@ SOURCES += \
         mouseconfigtool.cpp \
     usbreadthread.cpp \
     usermodepro.cpp \
-    macros.cpp
+    macros.cpp \
+    config.cpp
 
 HEADERS += \
         mouseconfigtool.h \
     usbreadthread.h \
     usermodepro.h \
     macros.h \
-    key_map.h
+    key_map.h \
+    config.h
 
 FORMS += \
         mouseconfigtool.ui \
-    macrokey.ui \
-    macros.ui
+    macros.ui \
+    config.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

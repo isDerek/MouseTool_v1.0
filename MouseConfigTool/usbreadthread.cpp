@@ -26,7 +26,24 @@ void USBReadThread::run()
             {
                 revData[i] = buf[i];
             }
-            if(res == 0)
+            // 若读取 HID 设备不成功则上报设备异常关闭状态
+            if(res == -1)
+            {
+                // 若设备标识符存在，则关闭 HID 设备，上报设备关闭
+                if(handle)
+                {
+                   hid_close(handle);
+                   emit postHIDDeviceOpen(false);
+                   startHIDDeviceFlag = false;
+                }
+                // 若设备标识符不存在，上报设备关闭
+                else
+                {
+                   emit postHIDDeviceOpen(false);
+                   startHIDDeviceFlag = false;
+                }
+            }
+            else if(res == 0)
             {
 
             }

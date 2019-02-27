@@ -5,6 +5,7 @@
 #include <QFileDialog>
 #include "QMouseEvent"
 #include <QBitmap>
+
 MouseConfigTool::MouseConfigTool(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MouseConfigTool)
@@ -190,10 +191,11 @@ void MouseConfigTool::slot_rfStatusTmr()
     getHIDDevceInfo();
     clearHIDDeviceInfoList();
     // 找到指定设备，并打开，向设备请求当前鼠标状态
-    if(HIDDeviceIsOpen && getCurrentMouseStatusFlag)
+    if(HIDDeviceIsOpen & getCurrentMouseStatusFlag)
     {
-        userModePro.getMouseCurrentStatus();
+        qDebug()<<"1111";
         getCurrentMouseStatusFlag = false;
+        userModePro.getMouseCurrentStatus();
         ui->mouseStatus->show();
         ui->mouseBtn->show();
         ui->currentDPIGroup->show();
@@ -201,7 +203,9 @@ void MouseConfigTool::slot_rfStatusTmr()
         ui->marcroKeyGroup->show();
         ui->missDeviceLabel->hide();
     }
-    else if( !HIDDeviceIsOpen && getCurrentMouseStatusFlag){
+    else if(!HIDDeviceIsOpen)
+    {
+        hiddenMainGui();
         ui->missDeviceLabel->show();
     }
 }
@@ -211,44 +215,46 @@ void MouseConfigTool::getHIDDevceInfo()
     struct hid_device_info *devs, *cur_dev;
      devs = hid_enumerate(0x0, 0x0);
      cur_dev = devs;
-
      char HID[20],product[20],manufacturer[20],releaseNum[20],interfaceNum[20],
              VID[20],PID[20],usagePage[20],usage[20];
      while (cur_dev) {
  //        qDebug("Device Found\n  type: %04hx %04hx\n  path: %s\n  serial_number: %ls", cur_dev->vendor_id, cur_dev->product_id, cur_dev->path, cur_dev->serial_number);
  //        qDebug("\n");
     // 查找到指定设备打开设备
-//    if(cur_dev->vendor_id == 1165 && cur_dev->product_id == 52736)
+//    if(cur_dev->vendor_id == 1133 && cur_dev->product_id == 49286)
     if(cur_dev->vendor_id == 6785 && cur_dev->product_id == 8247)
     {
-        usbReadThread.getOpenHIDDevice(8247,6785,!HIDDeviceIsOpen);// 调用线程函数去传递数据
-//        usbReadThread.getOpenHIDDevice(52736,1165,!HIDDeviceIsOpen);// 调用线程函数去传递数据
-        usbReadThread.start();
         // 若指定设备开启成功，则关闭查询 HID 设备定时器
         if(HIDDeviceIsOpen)
         {
             rfStatusTmr->stop();
         }
+        else
+        {
+            usbReadThread.getOpenHIDDevice(8247,6785,!HIDDeviceIsOpen);// 调用线程函数去传递数据
+//            usbReadThread.getOpenHIDDevice(49286,1133,!HIDDeviceIsOpen);// 调用线程函数去传递数据
+            usbReadThread.start();
+        }
         break;
     }
-    sprintf(HID,"VID:%x PID:%x",cur_dev->vendor_id,cur_dev->product_id);
-    sprintf(product,"%ls",cur_dev->product_string);
-    sprintf(manufacturer,"%ls",cur_dev->manufacturer_string);
-    sprintf(releaseNum,"%hx",cur_dev->release_number);
-    sprintf(interfaceNum,"%d",cur_dev->interface_number);
-    sprintf(VID,"%x",cur_dev->vendor_id);
-    sprintf(PID,"%x",cur_dev->product_id);
-    sprintf(usagePage,"%d",cur_dev->usage_page);
-    sprintf(usage,"%d",cur_dev->usage);
-    HIDDeviceList.append(QString(HID));
-    productList.append(QString(product));
-    manufacturerList.append(QString(manufacturer));
-    releaseNumList.append(QString(releaseNum));
-    interfaceNumList.append(QString(interfaceNum));
-    VIDList.append(QString(VID));
-    PIDList.append(QString(PID));
-    usagePageList.append(QString(usagePage));
-    usageList.append(QString(usage));
+//    sprintf(HID,"VID:%x PID:%x",cur_dev->vendor_id,cur_dev->product_id);
+//    sprintf(product,"%ls",cur_dev->product_string);
+//    sprintf(manufacturer,"%ls",cur_dev->manufacturer_string);
+//    sprintf(releaseNum,"%hx",cur_dev->release_number);
+//    sprintf(interfaceNum,"%d",cur_dev->interface_number);
+//    sprintf(VID,"%x",cur_dev->vendor_id);
+//    sprintf(PID,"%x",cur_dev->product_id);
+//    sprintf(usagePage,"%d",cur_dev->usage_page);
+//    sprintf(usage,"%d",cur_dev->usage);
+//    HIDDeviceList.append(QString(HID));
+//    productList.append(QString(product));
+//    manufacturerList.append(QString(manufacturer));
+//    releaseNumList.append(QString(releaseNum));
+//    interfaceNumList.append(QString(interfaceNum));
+//    VIDList.append(QString(VID));
+//    PIDList.append(QString(PID));
+//    usagePageList.append(QString(usagePage));
+//    usageList.append(QString(usage));
 //    qDebug()<<HIDDeviceList;
 //         qDebug("  Manufacturer: %ls\n", cur_dev->manufacturer_string);
 //         qDebug("  Product:      %ls\n", cur_dev->product_string);
@@ -464,6 +470,8 @@ void MouseConfigTool::slot_getHIDDeviceIsOpen(bool isOpen)
     else
     {
         HIDDeviceIsOpen = false;
+        rfStatusTmr->start(1000); // 若设备关闭，重新查询 HID 设备
+        getCurrentMouseStatusFlag = true; // 推送获取当前设备状态标志位
     }
 }
 
@@ -614,9 +622,64 @@ void MouseConfigTool::on_configBtn_clicked()
 
 void MouseConfigTool::on_closeBtn_clicked()
 {
-    close();
+    // 隐藏主窗口
+    this->hide();
+    // 新建托盘要显示的 icon
+    QIcon icon = QIcon(":/hidmouse/images/mouseLogo.png");
+    // 将 icon 设到 QSystemtrayIcon 对象中
+    mSysTrayIcon->setIcon(icon);
+    // 当鼠标移动到托盘上的图标时，会显示此处设置的内容
+    mSysTrayIcon->setToolTip(QObject::tr("WPI 鼠标配置工具"));
+    // 给 QSystemTrayIcon 添加槽函数
+    connect(mSysTrayIcon,SIGNAL(activated(QSystemTrayIcon::ActivationReason)),this,SLOT(on_activatedSysTrayIcon(QSystemTrayIcon::ActivationReason)));
+    // 创建显示主界面和退出的行为
+    createActions();
+    // 创建菜单项
+    createMenu();
+    // 在系统托盘显示此对象
+    mSysTrayIcon->show();
 }
 
+void MouseConfigTool::on_activatedSysTrayIcon(QSystemTrayIcon::ActivationReason reason)
+{
+    switch (reason) {
+    // 左键单击托盘图标，显示主界面
+        case QSystemTrayIcon::Trigger:
+            this->show();
+            break;
+        default:
+            break;
+    }
+}
 
+void MouseConfigTool::createActions()
+{
+    mShowMainAction = new QAction(QObject::tr("显示主界面"),this);
+    connect(mShowMainAction,SIGNAL(triggered()),this,SLOT(on_showMainAction()));
 
+    mExitAppAction = new QAction(QObject::tr("退出"),this);
+    connect(mExitAppAction,SIGNAL(triggered()),this,SLOT(on_exitAppAction()));
+}
 
+void MouseConfigTool::createMenu()
+{
+    mMenu = new QMenu(this);
+    // 新增菜单项---显示主界面
+    mMenu->addAction(mShowMainAction);
+    //增加分隔符
+    mMenu->addSeparator();
+    //新增菜单项---退出程序
+    mMenu->addAction(mExitAppAction);
+    //把QMenu赋给QSystemTrayIcon对象
+    mSysTrayIcon->setContextMenu(mMenu);
+}
+
+void MouseConfigTool::on_showMainAction()
+{
+    this->show();
+}
+
+void MouseConfigTool::on_exitAppAction()
+{
+    this->close();
+}

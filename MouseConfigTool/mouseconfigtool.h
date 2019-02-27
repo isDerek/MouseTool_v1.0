@@ -12,6 +12,7 @@
 #include <QFile>
 #include <QTime>
 #include <QPainter>
+#include <QSystemTrayIcon>
 class QFile; // 前置声明 QFile
 
 namespace Ui {
@@ -37,9 +38,11 @@ public:
     void mousePressEvent(QMouseEvent *event); // 窗体拖动
     void mouseMoveEvent(QMouseEvent *event); // 窗体拖动
     void mouseReleaseEvent(QMouseEvent *event); // 窗体拖动
+    void createActions();
+    void createMenu();
     unsigned short HexStrToUShort(QString str, int length); // 16进制字符串转 Ushort
     char ConvertHexChar(char ch); // 字符转 16 进制
-    Macros *macros = new Macros; // 实例化 Macro 类
+
 private:
     Ui::MouseConfigTool *ui;
     QStringList HIDDeviceList; // HID 设备显示
@@ -58,7 +61,12 @@ private:
     QTimer *rfStatusTmr; // 刷新状态栏，自动刷新端口定时器
     USBReadThread usbReadThread; // 读取 HID 设备消息线程
     UserModePro userModePro; // 用户模式协议类
+    Macros *macros = new Macros; // 实例化 Macro 类
     Config *config = new Config; // 设置窗口类实例化
+    QSystemTrayIcon *mSysTrayIcon = new QSystemTrayIcon; // 操作系统托盘操作类实例化
+    QMenu *mMenu; // 托盘菜单项
+    QAction *mShowMainAction; // 托盘菜单项的子项目--显示主界面
+    QAction *mExitAppAction; // 托盘菜单项的子项目--退出
     bool HIDDeviceIsOpen; // hid 设备是否开启
     bool m_pressed; // 窗体拖动是否按下
     bool getCurrentMouseStatusFlag = true; // 获取鼠标当前状态（界面初始化只执行一次）
@@ -96,7 +104,10 @@ private slots:
     void on_setMacroKey1Btn_clicked(); // 设备设置侧键一按键宏按钮
     void on_setMacroKey2Btn_clicked();// 设备设置侧键二按键宏按钮
     void on_closeBtn_clicked(); // 关闭窗口按钮
-    void on_configBtn_clicked();
+    void on_configBtn_clicked();// 设置图标按钮
+    void on_activatedSysTrayIcon(QSystemTrayIcon::ActivationReason reason);// 系统托盘操作类槽函数
+    void on_showMainAction();// 显示主界面
+    void on_exitAppAction();// 退出主界面
 };
 
 #endif // MOUSECONFIGTOOL_H

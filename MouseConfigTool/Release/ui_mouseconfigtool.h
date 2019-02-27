@@ -103,7 +103,7 @@ public:
 
         currentDPIGroup = new QGroupBox(centralWidget);
         currentDPIGroup->setObjectName(QString::fromUtf8("currentDPIGroup"));
-        currentDPIGroup->setGeometry(QRect(660, 280, 150, 300));
+        currentDPIGroup->setGeometry(QRect(660, 150, 150, 300));
         currentDPIGroup->setMinimumSize(QSize(150, 300));
         currentDPIGroup->setMaximumSize(QSize(150, 300));
         verticalLayout_2 = new QVBoxLayout(currentDPIGroup);
@@ -132,7 +132,7 @@ public:
 
         currentLEDGroup = new QGroupBox(centralWidget);
         currentLEDGroup->setObjectName(QString::fromUtf8("currentLEDGroup"));
-        currentLEDGroup->setGeometry(QRect(840, 280, 150, 300));
+        currentLEDGroup->setGeometry(QRect(840, 150, 150, 300));
         currentLEDGroup->setMinimumSize(QSize(150, 300));
         currentLEDGroup->setMaximumSize(QSize(150, 300));
         verticalLayout = new QVBoxLayout(currentLEDGroup);
@@ -196,7 +196,7 @@ public:
         missDeviceLabel->setAlignment(Qt::AlignCenter);
         marcroKeyGroup = new QGroupBox(centralWidget);
         marcroKeyGroup->setObjectName(QString::fromUtf8("marcroKeyGroup"));
-        marcroKeyGroup->setGeometry(QRect(840, 590, 150, 110));
+        marcroKeyGroup->setGeometry(QRect(840, 470, 150, 110));
         marcroKeyGroup->setMinimumSize(QSize(150, 110));
         marcroKeyGroup->setMaximumSize(QSize(150, 110));
         setMacroKey1Btn = new QPushButton(marcroKeyGroup);

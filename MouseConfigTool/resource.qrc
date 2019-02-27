@@ -14,5 +14,6 @@
         <file>images/mouseKey.png</file>
         <file>images/config.png</file>
         <file>images/config_hover.png</file>
+        <file>images/mouseLogo.png</file>
     </qresource>
 </RCC>

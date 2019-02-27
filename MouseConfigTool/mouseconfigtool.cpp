@@ -16,6 +16,7 @@ MouseConfigTool::MouseConfigTool(QWidget *parent) :
     ui->setupUi(this);
     mainGuiInit(); // 窗口 UI 初始化
     hiddenMainGui(); // 窗口 UI 隐藏
+    QSystemTrayIconInit(); // 操作系统托盘图标初始化
     rfStatusTmr = new QTimer; // 查询 HID 设备定时器
     connect(rfStatusTmr, SIGNAL(timeout()), this, SLOT(slot_rfStatusTmr()));
     rfStatusTmr->start(1000);
@@ -27,6 +28,24 @@ MouseConfigTool::MouseConfigTool(QWidget *parent) :
 MouseConfigTool::~MouseConfigTool()
 {
     delete ui;
+}
+
+void MouseConfigTool::QSystemTrayIconInit()
+{
+    // 新建托盘要显示的 icon
+    QIcon icon = QIcon(":/hidmouse/images/mouseLogo.png");
+    // 将 icon 设到 QSystemtrayIcon 对象中
+    mSysTrayIcon->setIcon(icon);
+    // 当鼠标移动到托盘上的图标时，会显示此处设置的内容
+    mSysTrayIcon->setToolTip(QObject::tr("WPI 鼠标配置工具"));
+    // 给 QSystemTrayIcon 添加槽函数
+    connect(mSysTrayIcon,SIGNAL(activated(QSystemTrayIcon::ActivationReason)),this,SLOT(on_activatedSysTrayIcon(QSystemTrayIcon::ActivationReason)));
+    // 创建显示主界面和退出的行为
+    createActions();
+    // 创建菜单项
+    createMenu();
+    // 在系统托盘显示此对象
+    mSysTrayIcon->show();
 }
 
 void MouseConfigTool::mainGuiInit()
@@ -215,8 +234,8 @@ void MouseConfigTool::getHIDDevceInfo()
     struct hid_device_info *devs, *cur_dev;
      devs = hid_enumerate(0x0, 0x0);
      cur_dev = devs;
-     char HID[20],product[20],manufacturer[20],releaseNum[20],interfaceNum[20],
-             VID[20],PID[20],usagePage[20],usage[20];
+//     char HID[20],product[20],manufacturer[20],releaseNum[20],interfaceNum[20],
+//             VID[20],PID[20],usagePage[20],usage[20];
      while (cur_dev) {
  //        qDebug("Device Found\n  type: %04hx %04hx\n  path: %s\n  serial_number: %ls", cur_dev->vendor_id, cur_dev->product_id, cur_dev->path, cur_dev->serial_number);
  //        qDebug("\n");
@@ -624,20 +643,6 @@ void MouseConfigTool::on_closeBtn_clicked()
 {
     // 隐藏主窗口
     this->hide();
-    // 新建托盘要显示的 icon
-    QIcon icon = QIcon(":/hidmouse/images/mouseLogo.png");
-    // 将 icon 设到 QSystemtrayIcon 对象中
-    mSysTrayIcon->setIcon(icon);
-    // 当鼠标移动到托盘上的图标时，会显示此处设置的内容
-    mSysTrayIcon->setToolTip(QObject::tr("WPI 鼠标配置工具"));
-    // 给 QSystemTrayIcon 添加槽函数
-    connect(mSysTrayIcon,SIGNAL(activated(QSystemTrayIcon::ActivationReason)),this,SLOT(on_activatedSysTrayIcon(QSystemTrayIcon::ActivationReason)));
-    // 创建显示主界面和退出的行为
-    createActions();
-    // 创建菜单项
-    createMenu();
-    // 在系统托盘显示此对象
-    mSysTrayIcon->show();
 }
 
 void MouseConfigTool::on_activatedSysTrayIcon(QSystemTrayIcon::ActivationReason reason)

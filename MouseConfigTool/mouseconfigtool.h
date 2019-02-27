@@ -40,6 +40,7 @@ public:
     void mouseReleaseEvent(QMouseEvent *event); // 窗体拖动
     void createActions();
     void createMenu();
+    void QSystemTrayIconInit(); //操作系统托盘图标初始化
     unsigned short HexStrToUShort(QString str, int length); // 16进制字符串转 Ushort
     char ConvertHexChar(char ch); // 字符转 16 进制
 
